@@ -64,22 +64,22 @@ Sub Object 3: Environment Controls
 
 Sub Object 4: Infotainment System
     Name 3 things you'll find on the:    Infotainment System
-        1) 
-        2)
-        3)
+        1) CD disc drive
+        2) volume control
+        3) navigation screen
     Name 3 things you can do with the:   Infotainment System
-        1)
-        2)
-        3)
+        1) play music
+        2) turn volme up or down
+        3) map a destination
 
 Sub Object 5: Seat 
     Name 3 things you'll find on the:    Seat
-        1)
-        2)
-        3)
+        1) lever to recline the seat
+        2) lever to slide back the seat
+        3) seat belt
     Name 2 things you can do with the:   Seat
-        1)
-        2)
+        1) adjust the angle of the back support
+        2) adjust the distance the seat is from the steering wheel.
 */
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
