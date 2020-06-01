@@ -82,6 +82,21 @@ Sub Object 5: Seat
         2) adjust the distance the seat is from the steering wheel.
 */
 /*
+Part1b: 4 un-related UDTs in plain english
+object1b1 : hairDryer
+    things on the hairDryer:
+        1) on/off switch
+        2) Hot/Cold swicth
+        3) High Speed/Low speed switch.
+    things yoyu can do with a hairDryer
+        1) dry 
+        2) warm 
+        3) blow    
+
+Object1b2 : 
+*/
+
+/*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
  Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
