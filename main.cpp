@@ -88,12 +88,52 @@ object1b1 : hairDryer
         1) on/off switch
         2) Hot/Cold swicth
         3) High Speed/Low speed switch.
-    things yoyu can do with a hairDryer
+    things you can do with a hairDryer
         1) dry 
         2) warm 
         3) blow    
 
-Object1b2 : 
+Object1b2 : fuzzFace
+    things on the fuzzFace:
+        1) bypass switch
+        2) fuzz knob
+        3) volume knob
+    things you can do with the fuzzFace
+        1) turn on or off the effect
+        2) turn up or down the fuzz
+        3) turn up or down the volume level
+
+Object1b3 : oscilloscope
+    things on the oscilloscope:
+        1) horizontal input
+        2) vertical input
+        3) horizontal gain control
+        4) vertical gain control
+        5) horizontal sweep control
+    things you can do with the oscilloscope
+        1) view electrical waveforms over time
+        2) graph the difference in electrical waveforms
+        3) graph the input of a DUT vs the output of the DUT
+        4) measure just about any electrical characteristic lel
+
+Object1b4 : guitar
+    things onthe guitar:
+        1) strings
+        2) frets
+        3) tuners
+        4) bridge
+    things you can do with the guitar:
+        1) tune the strings to pitch
+        2) pluck a string
+        3) fret a melody
+        4) strum a chord
+
+*/
+/*
+Part 1c: you will write 1 UDT in plain english that will be made of 5 related sub-objects
+Main Object : MPK49KeyboardController
+Sub Object1 : 
+
 */
 
 /*
