@@ -117,7 +117,7 @@ Object1b3 : oscilloscope
         4) measure just about any electrical characteristic lel
 
 Object1b4 : guitar
-    things onthe guitar:
+    things on the guitar:
         1) strings
         2) frets
         3) tuners
@@ -132,8 +132,61 @@ Object1b4 : guitar
 /*
 Part 1c: you will write 1 UDT in plain english that will be made of 5 related sub-objects
 Main Object : MPK49KeyboardController
-Sub Object1 : 
+Sub Object1 : keySection
+    things on the keySection
+        1) white keys
+        2) black keys
+        3) pitch bend
+    things you can do with the
+        1) play notes
+        2) play accidentals
+        3) continuously vary the notes pitch
 
+Sub Object2 : arpeggiator section
+    things on the arpeggiator section
+        1) arpeggio button
+        2) latch
+        3) pattern bank
+    things you can do with the arpeggiator section
+        1) turn on or off arpeggio section
+        2) engage latching function
+        3) swap arpeggio sequence pattern
+
+Sub Object3 : Pads Section
+    things on the Pads Section
+        1) drum pads
+        2) pad sample banks
+        3) velocity control
+    things you can do with the Pads Section
+        1) play beats
+        2) create sequences
+        3) control dynamics
+
+Sub Object4 : Mixer Section
+    things on the Mixer Section
+        1) faders
+        2) pan control
+        3) mute switches
+    things you can do with the Mixer Section
+        1) control levels of each audio track
+        2) pan left or right each track
+        3) mute individual tracks
+
+Sub Object5 : Transport Section
+    things on the Transport Section
+        1) stop
+        2) play  
+        3) record
+        4) rewind
+        5) fast forward
+        6) tap tempo
+    things you can do with the Transport Section
+        1) stop the transport
+        2) engage transport
+        3) write to an armed track at the transport position
+        4) move transport to the beginning
+        5) move the transport forward on the recording timeline
+        6) tap in the tempo to recors at
 */
 
 /*
