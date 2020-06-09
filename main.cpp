@@ -93,7 +93,7 @@ object1b1 : HairDryer
         2) warm 
         3) blow    
 */
-//Part1c1: Functioning code of UDT's
+//Part1e1: Functioning code of UDT's
 struct HairDryer
 {
     bool powerSwitch;
@@ -116,7 +116,7 @@ Object1b2 : FuzzFace
         2) turn up or down the fuzz
         3) turn up or down the volume level
 */
-//part1c2:
+//part1e2:
 struct FuzzFace
 {
     void fuzzAudio(bool bypass, float fuzz, float volume); 
@@ -137,7 +137,7 @@ Object1b3 : oscilloscope
         3) graph the input of a DUT vs the output of the DUT
         4) measure just about any electrical characteristic lel
 */
-//part1c3;
+//part1e3;
 struct Oscilloscope
 {
     float horizontalInput;
@@ -164,7 +164,7 @@ Object1b4 : guitar
         3) fret a melody
         4) strum a chord
 */
-//part1c4:
+//part1e4:
 struct Guitar
 {
     struct TuneString
@@ -213,7 +213,35 @@ Sub Object3 : Pads Section
         1) play beats
         2) create sequences
         3) control dynamics
+*/
+struct MPK49KeyboardController
+{
+    struct KeySection
+    {
+        void playNote(int noteNumber, int velocity, int pitchbend)
+    };
 
+    struct ArpeggiatorSection 
+    {
+        bool arpeggioGenerate;
+        bool arpeggioPlayContinuously;
+        int patternBank;
+
+        void arpeggioPattern(int patternBankNumber);
+        
+    }
+
+    struct DrumPadSection
+    {
+        int drumPad;
+        int sampleBanks;
+        int velocity;
+
+        void playKick(int playSample, int velocity);
+        void playBeat(int drunmGroove, float tempo);
+    }
+};
+/*
 Sub Object4 : Mixer Section
     things on the Mixer Section
         1) faders
