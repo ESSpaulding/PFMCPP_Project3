@@ -83,8 +83,8 @@ Sub Object 5: Seat
 */
 /*
 Part1b: 4 un-related UDTs in plain english
-object1b1 : hairDryer
-    things on the hairDryer:
+object1b1 : HairDryer
+    things on the HairDryer:
         1) on/off switch
         2) Hot/Cold swicth
         3) High Speed/Low speed switch.
@@ -92,8 +92,21 @@ object1b1 : hairDryer
         1) dry 
         2) warm 
         3) blow    
+*/
+//Part1c1: Functioning code of UDT's
+struct HairDryer
+{
+    bool powerSwitch;
+    bool tempIsHot;
+    int fanSpeed;
 
-Object1b2 : fuzzFace
+    void dry();
+    void warm();
+    void blow();
+};
+
+/*
+Object1b2 : FuzzFace
     things on the fuzzFace:
         1) bypass switch
         2) fuzz knob
@@ -102,7 +115,15 @@ Object1b2 : fuzzFace
         1) turn on or off the effect
         2) turn up or down the fuzz
         3) turn up or down the volume level
+*/
+//part1c2:
+struct FuzzFace
+{
+    void fuzzAudio(bool bypass, float fuzz, float volume); 
 
+};
+
+/*
 Object1b3 : oscilloscope
     things on the oscilloscope:
         1) horizontal input
@@ -115,7 +136,22 @@ Object1b3 : oscilloscope
         2) graph the difference in electrical waveforms
         3) graph the input of a DUT vs the output of the DUT
         4) measure just about any electrical characteristic lel
+*/
+//part1c3;
+struct Oscilloscope
+{
+    float horizontalInput;
+    float verticalInput;
+    int horizontalGainControl;
+    int verticalGainControl;
+    
+    void viewWaveform(float horizontalInput, float horizontalSweep);
 
+    void waveformCompare(float horizontalInput, float verticalInput);
+    
+    void lissajousFigure(float horizontalInput, float verticalInput, int xGain, int yGain);
+};
+/*
 Object1b4 : guitar
     things on the guitar:
         1) strings
@@ -127,8 +163,24 @@ Object1b4 : guitar
         2) pluck a string
         3) fret a melody
         4) strum a chord
-
 */
+//part1c4:
+struct Guitar
+{
+    struct TuneString
+    {
+        bool tightenString;
+    };
+    int strings;
+    int frets;
+
+    TuneString lowString;
+    TuneString highString;
+    
+    void pluckNote(int string, int fret);
+
+    void strumChord(int String1, int String2, int String3, int fret1, int fret2, int fret3 );
+}
 /*
 Part 1c: you will write 1 UDT in plain english that will be made of 5 related sub-objects
 Main Object : MPK49KeyboardController
