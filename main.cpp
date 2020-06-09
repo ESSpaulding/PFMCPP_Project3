@@ -180,7 +180,7 @@ struct Guitar
     void pluckNote(int string, int fret);
 
     void strumChord(int String1, int String2, int String3, int fret1, int fret2, int fret3 );
-}
+};
 /*
 Part 1c: you will write 1 UDT in plain english that will be made of 5 related sub-objects
 Main Object : MPK49KeyboardController
@@ -213,35 +213,7 @@ Sub Object3 : Pads Section
         1) play beats
         2) create sequences
         3) control dynamics
-*/
-struct MPK49KeyboardController
-{
-    struct KeySection
-    {
-        void playNote(int noteNumber, int velocity, int pitchbend)
-    };
 
-    struct ArpeggiatorSection 
-    {
-        bool arpeggioGenerate;
-        bool arpeggioPlayContinuously;
-        int patternBank;
-
-        void arpeggioPattern(int patternBankNumber);
-        
-    }
-
-    struct DrumPadSection
-    {
-        int drumPad;
-        int sampleBanks;
-        int velocity;
-
-        void playKick(int playSample, int velocity);
-        void playBeat(int drunmGroove, float tempo);
-    }
-};
-/*
 Sub Object4 : Mixer Section
     things on the Mixer Section
         1) faders
@@ -267,7 +239,57 @@ Sub Object5 : Transport Section
         4) move transport to the beginning
         5) move the transport forward on the recording timeline
         6) tap in the tempo to recors at
+
 */
+struct MPK49KeyboardController
+{
+    struct KeySection
+    {
+        void playNote(int noteNumber, int velocity, int pitchbend);
+    };
+
+    struct ArpeggiatorSection 
+    {
+        bool arpeggioGenerate;
+        bool arpeggioPlayContinuously;
+        int patternBank;
+
+        void arpeggioPattern(int patternBankNumber);
+        
+    };
+
+    struct DrumPadSection
+    {
+        int drumPad;
+        int sampleBanks;
+        int velocity;
+
+        void playKick(int playSample, int velocity);
+        void playBeat(int drunmGroove, float tempo);
+    };
+
+    struct MixerSection
+    {
+        float fader;
+        float pan;
+        bool mute;
+
+        void channelAdjust(int channel, int gain, int pan, bool mute);
+    };
+
+    struct TransportSection
+    {
+        bool stop;
+        bool play;
+        bool record;
+        bool rewind;
+        bool fastForward;
+        bool tapTempo;
+
+        void transportControl(bool stop, bool play, bool record, bool rewind, bool fastForward, bool tapTempo);
+
+    };
+};
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
