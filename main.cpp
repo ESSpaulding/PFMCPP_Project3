@@ -10,7 +10,7 @@ reinforce the syntax habits that C++ requires.
 What you create in this project will be used as the basis of Project 5 in the course.   
 
 ************************
-Part1 purpose:  Learn to write UDTs
+Part1 purpose:  Learn to write UDTs2
 
 You are going to write 10 UDTs in project3.  
     Part 1a: you will learn to think about an object in terms of its sub-objects.
@@ -20,7 +20,7 @@ You are going to write 10 UDTs in project3.
     Part 1e: you will convert those 10 plain-english UDTs into code that runs.
 ************************
 
-1) Look at the picture of the car interior (Part1a pic.jpg).  
+1) Look at the picture of the car interior (Part1a pic.jpg).  // No idea where this is supposed to be found
     Fill in the blanks below which break this car interior down into sub-objects.
 
     Several sub-objects are listed below that make up this car's interior.
@@ -81,6 +81,107 @@ Sub Object 5: Seat
         1) adjust the angle of the back support
         2) adjust the distance the seat is from the steering wheel.
 */
+//Main Object: Car Interior
+struct CarInterior
+{
+//Sub Object 1: Steering Wheel
+    struct SteeringWheel
+    {
+    //Name 4 things you'll find on the:    Steering Wheel
+        //1) paddle shifters
+        int paddleShifter = 0;    // shift up ,down , neutral?
+        //2) 'cruise control' controls
+        int cruiseControl = 0;
+        //3) horn
+        bool horn = false;   
+        //4) 'turn signal" controls
+        int turnSignal = 0;
+    //Name 2 things you can do with the:   Steering Wheel
+        //1) adjust cruise control settings.
+        void cruiseControlSetting (string setCruiseState);  // method receives "set", "cancel", "increment", "decrement" 
+        //2) honk
+        void honk ();  // method returns nothing as when it is called, this funtion triggers the horn from inside
+    }
+//Sub Object 2: Instrument Cluster
+    //Name 4 things you'll find on the:   Instrument Cluster
+    struct InstrumentCluster
+    {
+        //1) speedometer
+        float speed = 0;  //speedometer is the noun, but the data you are interested is the speed
+        //2) tachometer
+        float rpm = 0;    // tachometer is the devise that that rpm is displayed on.  so rpm is the data
+        //3) gas level guage
+        float fuel = 0;  
+        //4) oil pressure guage
+        float oilPressure = 0;
+    //Name 3 things you can do with the:   Instrument Cluster
+        //1) get the speed of the car
+        void getSpeedOfCar();  // returns data, but doesn't pass any data to this method
+        //2) monitor engine revolutions per minute
+        void monitorRPM(float rpm);
+        //3) know when to get more gas
+        void lowFuelWarning(float fuel);
+    }
+//Sub Object 3: Environment Controls
+    struct EnvironmentControls
+    {
+    //Name 3 things you'll find on the:    Environment Controls
+        //1) temperature control
+        int temperatureControl = 0;
+        //2) fan speed control
+        int fanSpeedControl = 0;
+        //3) vent control
+        int ventControl = 0;
+    //Name 3 things you can do with the:   Environment Controls
+        //1) adjust the temperature
+        void temperatureControlHasChanged(int temperatureControl);
+        //2) adjust air flow
+        void airFlowAdjusted(int fanspeedControl);
+        //3) change the vents where air comes out
+        void ventHasChanged(int ventControl);
+    }
+//Sub Object 4: Infotainment System
+    struct InfoTainmentSystem
+    {
+    //Name 3 things you'll find on the:    Infotainment System
+        //1) CD disc drive
+        struct CDDiscDrive   //seems like this is a UDT
+        {
+            //2) volume control
+            float volume = 0;
+            //1) play music
+            void playMusic();
+            //2) turn volume up or down
+            void volumeLevelHasChanged(float volume);
+
+        } 
+        
+        //3) navigation screen
+        struct NavigationScreen
+        {
+            //3) map a destination
+            void mapDestination();
+
+        }
+
+    }
+//Sub Object 5: Seat 
+    struct seat
+    {
+    //Name 3 things you'll find on the:    Seat
+        //1) lever to recline the seat
+        int seatReclineAngle = 90;
+        //2) lever to slide back the seat
+        int seatSlidePosition = 0;
+        //3) seat belt
+        bool seatBeltFastened = false;
+    //Name 2 things you can do with the:   Seat
+        //1) adjust the angle of the back support
+        void seatAngleHasChanged(int seatReclineAngle)
+        //2) adjust the distance the seat is from the steering wheel.
+        void seatSlideHasChanged(int seatSlidePosition)
+    }
+}
 /*
 Part1b: 4 un-related UDTs in plain english
 object1b1 : HairDryer
@@ -96,11 +197,11 @@ object1b1 : HairDryer
 //Part1e1: Functioning code of UDT's
 struct HairDryer
 {
-    bool powerSwitch;
-    bool tempIsHot;
-    int fanSpeed;
+    bool powerSwitch = false;
+    bool tempIsHot = false;
+    int fanSpeed = 0;
 
-    void dry();
+    void dry(bool powerSwitch, bool);
     void warm();
     void blow();
 };
