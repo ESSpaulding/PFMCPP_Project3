@@ -81,6 +81,8 @@ Sub Object 5: Seat
         1) adjust the angle of the back support
         2) adjust the distance the seat is from the steering wheel.
 */
+#include<iostream>
+
 //Main Object: Car Interior
 struct CarInterior
 {
@@ -98,10 +100,10 @@ struct CarInterior
         int turnSignal = 0;
     //Name 2 things you can do with the:   Steering Wheel
         //1) adjust cruise control settings.
-        void cruiseControlSetting (string setCruiseState);  // method receives "set", "cancel", "increment", "decrement" 
+        void cruiseControlSetting (std::string setCruiseState);  // method receives "set", "cancel", "increment", "decrement" 
         //2) honk
         void honk ();  // method returns nothing as when it is called, this funtion triggers the horn from inside
-    }
+    };
 //Sub Object 2: Instrument Cluster
     //Name 4 things you'll find on the:   Instrument Cluster
     struct InstrumentCluster
@@ -121,7 +123,7 @@ struct CarInterior
         void monitorRPM(float rpm);
         //3) know when to get more gas
         void lowFuelWarning(float fuel);
-    }
+    };
 //Sub Object 3: Environment Controls
     struct EnvironmentControls
     {
@@ -139,7 +141,7 @@ struct CarInterior
         void airFlowAdjusted(int fanspeedControl);
         //3) change the vents where air comes out
         void ventHasChanged(int ventControl);
-    }
+    };
 //Sub Object 4: Infotainment System
     struct InfoTainmentSystem
     {
@@ -154,7 +156,7 @@ struct CarInterior
             //2) turn volume up or down
             void volumeLevelHasChanged(float volume);
 
-        } 
+        }; 
         
         //3) navigation screen
         struct NavigationScreen
@@ -162,9 +164,9 @@ struct CarInterior
             //3) map a destination
             void mapDestination();
 
-        }
+        };
 
-    }
+    };
 //Sub Object 5: Seat 
     struct seat
     {
@@ -177,11 +179,11 @@ struct CarInterior
         bool seatBeltFastened = false;
     //Name 2 things you can do with the:   Seat
         //1) adjust the angle of the back support
-        void seatAngleHasChanged(int seatReclineAngle)
+        void seatAngleHasChanged(int seatReclineAngle);
         //2) adjust the distance the seat is from the steering wheel.
-        void seatSlideHasChanged(int seatSlidePosition)
-    }
-}
+        void seatSlideHasChanged(int seatSlidePosition);
+    };
+};
 /*
 Part1b: 4 un-related UDTs in plain english
 object1b1 : HairDryer
@@ -222,7 +224,7 @@ struct FuzzFace
 {
     bool bypass = true;
     float fuzzKnob = 0.0f;
-    float volumeKnob = 0.0f
+    float volumeKnob = 0.0f;
 
     void fuzzAudio(bool bypass, float fuzz, float volume); 
 
