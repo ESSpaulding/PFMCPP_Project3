@@ -107,13 +107,13 @@ struct CarInterior
     struct InstrumentCluster
     {
         //1) speedometer
-        float speed = 0;  //speedometer is the noun, but the data you are interested is the speed
+        float speed = 0.0f;  //speedometer is the noun, but the data you are interested is the speed
         //2) tachometer
-        float rpm = 0;    // tachometer is the devise that that rpm is displayed on.  so rpm is the data
+        float rpm = 0.0f;    // tachometer is the devise that that rpm is displayed on.  so rpm is the data
         //3) gas level guage
-        float fuel = 0;  
+        float fuel = 0.0f;  
         //4) oil pressure guage
-        float oilPressure = 0;
+        float oilPressure = 0.0f;
     //Name 3 things you can do with the:   Instrument Cluster
         //1) get the speed of the car
         void getSpeedOfCar();  // returns data, but doesn't pass any data to this method
@@ -148,7 +148,7 @@ struct CarInterior
         struct CDDiscDrive   //seems like this is a UDT
         {
             //2) volume control
-            float volume = 0;
+            float volume = 0.0f;
             //1) play music
             void playMusic();
             //2) turn volume up or down
@@ -197,13 +197,13 @@ object1b1 : HairDryer
 //Part1e1: Functioning code of UDT's
 struct HairDryer
 {
-    bool powerSwitch = false;
-    bool tempIsHot = false;
+    bool powerOn = false;
+    int temperatureSetting = 0;
     int fanSpeed = 0;
 
-    void dry(bool powerSwitch, bool);
-    void warm();
-    void blow();
+    void dry(bool powerOn, int temperatureSetting, int fanSpeed);
+    void warm(bool powerOn, int temperatureSetting, int fanSpeed);
+    void blow(bool powerOn, int temperatureSetting, int fanSpeed);
 };
 
 /*
@@ -220,6 +220,10 @@ Object1b2 : FuzzFace
 //part1e2:
 struct FuzzFace
 {
+    bool bypass = true;
+    float fuzzKnob = 0.0f;
+    float volumeKnob = 0.0f
+
     void fuzzAudio(bool bypass, float fuzz, float volume); 
 
 };
@@ -241,10 +245,10 @@ Object1b3 : oscilloscope
 //part1e3;
 struct Oscilloscope
 {
-    float horizontalInput;
-    float verticalInput;
-    int horizontalGainControl;
-    int verticalGainControl;
+    float horizontalInput = 0.0f;
+    float verticalInput = 0.0f;
+    int horizontalGainControl = 0;
+    int verticalGainControl = 0;
     
     void viewWaveform(float horizontalInput, float horizontalSweep);
 
@@ -270,13 +274,13 @@ struct Guitar
 {
     struct TuneString
     {
-        bool tightenString;
-    };
-    int strings;
-    int frets;
+        bool tightenString = false;
+        bool loosenString = false;
 
-    TuneString lowString;
-    TuneString highString;
+        void checkStringPitch(float targetPitch, float currentPitch);
+    };
+    int strings = 6;
+    int frets = 22;
     
     void pluckNote(int string, int fret);
 
@@ -351,19 +355,19 @@ struct MPK49KeyboardController
 
     struct ArpeggiatorSection 
     {
-        bool arpeggioGenerate;
-        bool arpeggioPlayContinuously;
-        int patternBank;
+        bool arpeggioGenerate = false;
+        bool arpeggioPlayContinuously = false;
+        int patternBank = 0;
 
-        void arpeggioPattern(int patternBankNumber);
+        void arpeggioPattern(int patternBankNumber, bool startPattern, bool stopPattern);
         
     };
 
     struct DrumPadSection
     {
-        int drumPad;
-        int sampleBanks;
-        int velocity;
+        int drumPad = 0;
+        int sampleBanks = 99;
+        int velocity = 127;
 
         void playKick(int playSample, int velocity);
         void playBeat(int drunmGroove, float tempo);
@@ -371,21 +375,21 @@ struct MPK49KeyboardController
 
     struct MixerSection
     {
-        float fader;
-        float pan;
-        bool mute;
+        float faderValue = 0.5f;
+        float pan = 0.5f;
+        bool mute = true;
 
         void channelAdjust(int channel, int gain, int pan, bool mute);
     };
 
     struct TransportSection
     {
-        bool stop;
-        bool play;
-        bool record;
-        bool rewind;
-        bool fastForward;
-        bool tapTempo;
+        bool stop = true;
+        bool play = false;
+        bool record = false;
+        bool rewind = false;
+        bool fastForward = false;
+        bool tapTempo = false;
 
         void transportControl(bool stop, bool play, bool record, bool rewind, bool fastForward, bool tapTempo);
 
