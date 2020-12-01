@@ -53,59 +53,60 @@ Thing: Car Wash
  */
 
 /*
-Thing 1)
+Thing 1)oscilloscope
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)horizontal input
+    2)vertical input
+    3)horizontal gain control
+    4)vertical gain control
+    5)horizontal sweep control
 3 things it can do:
-    1)
-    2)
-    3)
+    1)graph voltage over time
+    2)graph the difference in electrical waveforms
+    3)measure voltage
+ */
+
+
+/*
+Thing 2)cell phone
+5 properties:
+    1)carrier
+    2)screen dimensions
+    3)amount of RAM
+    4)whether or not is has a SD card port
+    5)whether or not it has a headphone port
+3 things it can do:
+    1)make calls
+    2)play games
+    3)send emails
  */
 
 /*
-Thing 2)
+Thing 3)guitar
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)wood type
+    2)number of frets
+    3)scale length
+    4)whether or not it has a tremelo bridge
+    5)number of strings
 3 things it can do:
-    1)
-    2)
-    3)
+    1)tune the strings
+    2)play a melody
+    3)strum a chord
  */
 
 /*
-Thing 3)
+Thing 4)parametric eq
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)Low shelf frequency
+    2)Hight shelf frequency
+    3)Center band frequency
+    4)center band gain
+    5)center band slope
 3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 4)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
+    1)de-ess vocals
+    2)filter rumble
+    3)kill feedback
  */
 
 
