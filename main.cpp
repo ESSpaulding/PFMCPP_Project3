@@ -27,10 +27,7 @@ without errors or warnings before moving on to writing the next UDT.
 
 1) define an empty struct for each of your 10 types. i.e.:
 */
-struct CellPhone
-{
 
-};
 /*
 2) Copy your 5 properties & 3 actions into the empty struct body.
     - comment them out.
@@ -103,7 +100,7 @@ struct CarWash //                                   1) define an empty struct fo
     };
 
     //wash and wax car
-    void washAndWaxCar( Car car ); //4) a member function whose parameter is a UDT.
+    void washAndWaxCar( Car car ); //4) a member function whose parameter is a UDT.  
     //charge customer
     float chargeCustomer(float discountPercentage);
     //detail the car interior
@@ -112,12 +109,6 @@ struct CarWash //                                   1) define an empty struct fo
     //5) a member variable whose type is a UDT.
     Car carBeingServiced;  
 };
-
-
-
-
-
-
 
 /*
 Thing 1)oscilloscope
@@ -159,7 +150,7 @@ struct Oscilloscope
 Thing 2)cell phone
 5 properties:
     1)carrier
-    2)screen dimensions
+    2)screen size
     3)amount of RAM
     4)whether or not is has a SD card port
     5)whether or not it has a headphone port
@@ -168,7 +159,39 @@ Thing 2)cell phone
     2)play games
     3)send emails
  */
+struct CellPhone
+{
+//5 properties:
+    //1)carrier
+    std::string carrier = "Sprint";
+    //2)screen size
+    int screenSize = 3;
+    //3)amount of RAM
+    int gigabytesOfRAM = 8;
+    //4)whether or not is has a SD card port
+    bool hasSDCardPort = false;
+    //5)whether or not it has a headphone port
+    bool phoneHasHeadphoneJack = true;
+   // 5) make 2 of the 10 user-defined types have a nested class. 
+   struct TouchScreen
+    {
+        float screenHeight = 4.5f;
+        float screenWidth = 3.0f;
+        int x = 0, y = 0;
 
+        void fingerPrintVerification(float ownersFinger, float usersFinger);
+        void getFingerPosition(int X, int Y);
+    };
+//3 things it can do:
+    //1)make calls
+    void makeCall (int phoneNumber, std::string personYouAreCalling);
+    //2)play games
+    void playGame (bool gameMode);
+    //3)send emails
+    void sendEmail (std::string emailAddress);
+
+    TouchScreen touchScreen;
+};
 /*
 Thing 3)guitar
 5 properties:
@@ -182,6 +205,40 @@ Thing 3)guitar
     2)play a melody
     3)strum a chord
  */
+ struct Guitar
+ {
+    //5 properties:
+    //1)wood type
+    std::string woodType = "mahogany";
+    //2)number of frets
+    int numberOfFrets = 22;
+    //3)scale length
+    float scaleLength = 24.75f;
+    //4)whether or not it has a tremelo bridge
+    bool hasTremeloBridge = true;
+    //5)number of strings
+    int numberOfstrings = 6;
+   //5) make 2 of the 10 user-defined types have a nested class. 
+    struct Tremelo
+    {
+        int numberOfSprings = 3;
+        bool isTremeloFloating = true;
+        bool isTremeloLocking = true;
+
+        void Flutter(float startFrequency, float endFrequency, float flutterRate);
+        void diveBomb(float startFrequency, float endFrequency, float pitchDecentTime);
+    
+    };
+    //3 things it can do:
+    //1)tune the strings
+    void tuneTheStrings (float pitchToTuneTo, int stringToTune);
+    //2)play a melody
+    void playMelody (std::string notesOfScale, std::string keyToPlayIn);
+    //3)strum a chord
+    void strumChord (std::string rootNote, bool chordHasMinorThird, bool chordHasMinorSeventh);
+
+    Tremelo tremelo;
+ };
 
 /*
 Thing 4)parametric eq
@@ -196,7 +253,27 @@ Thing 4)parametric eq
     2)filter rumble
     3)kill feedback
  */
-
+struct ParametricEq
+{
+    //5 properties:
+    //1)Low shelf frequency
+    float lowShelfFrequency = 50.0f;
+    //2)Hight shelf frequency
+    float highShelfFrequency = 18000.0f;
+    //3)Center band frequency
+    float centerBandFrequency = 1000.0f;
+    //4)center band gain
+    float centerBandGain = 0.5f;
+    //5)center band slope
+    float centerBandSlope = 0.7f;
+    //3 things it can do:
+    //1)de-ess vocals
+    void vocalDeEss (float sibilanceAmount, float sibilanceSuppression);
+    //2)filter rumble
+    void rumbleFilter (float rumbleFrequency, float filterCut);
+    //3)kill feedback
+    void killFeedback (float feedbackFrequency, float gainReduction);
+};
 /*
 Thing 5)keyboard assembly
 5 properties:
@@ -207,10 +284,30 @@ Thing 5)keyboard assembly
     5)octave controls
 3 things it can do:
     1)send midi
-    2)send velocity
+    2)shift octaves
     3)send aftertouch
  */
-
+struct KeyBoardAssembly
+{
+    //5 properties:
+    //1)number of keys
+    int numberOfKeys = 88;
+    //2)has aftertouch
+    bool keyHasAfterTouch = true;
+    //3)whether or not the keys are weighted
+    bool keysAreWeighted = true;
+    //4)key length
+    float keyLength = 5.5f;
+    //5)octave controls
+    int octaveControls = 2;
+    //3 things it can do:
+    //1)send midi
+    void sendMidi (int channel, int midiNote, int velocity);
+    //2)shift octaves
+    void shiftOctave (bool octaveShiftUp, bool octaveShiftDown);
+    //3)send aftertouch
+    void sendMidiAfterTouch (int channel, int midiAfterTouch);
+};
 /*
 Thing 6)arrpeggiator section
 5 properties:
@@ -239,7 +336,7 @@ struct ArpeggiatorSection
 // 3 things it can do:
 //     1)turn on or off arpeggio section
     void turnOnArpeggioSection(bool isOn);
-//     2)store arpeggiator patter
+//     2)store arpeggiator pattern
     void storeArpeggiatorPattern(std::string patterName);
 //     3)swap arpeggio pattern
     void swapPattern( std::string newPattern, int targetToReplace);
@@ -255,22 +352,28 @@ Thing 7)pads section
 3 things it can do:
     1)play beats
     2)create sequences
-    .
     3)control dynamics
  */
 struct PadsSection
 {
 // 5 properties:
 //     1)number of pads
+    int numberOfPads = 9;
 //     2)velocity sensitive 
+    bool padsAreVelocitySensitive = true;
 //     3)midi number
+    int midiNumber = 127;
 //     4)pad composition
+    std::string padComposition = "foam rubber";
 //     5)softness
+    std::string durometerOfPad = "bouncy af";
 // 3 things it can do:
 //     1)play beats
+    void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose parameter is a UDT.
 //     2)create sequences
-    void createSequences(ArpeggiatorSection arpSection, int padNum);
+    void createSequences (ArpeggiatorSection arpSection, int padNum);
 //     3)control dynamics
+    void dynamicControl (int maxVelocity, int minVelocity);
 };
 
 /*
@@ -286,7 +389,28 @@ Thing 8)mixer section
     2)adjust pan
     3)mute track
  */
-
+struct MixerSection
+{
+//Thing 8)mixer section
+//5 properties:
+//    1)number of faders
+    int numberOfFaders = 8;
+//    2)number of pan pots
+    int numberOfPanPots = 8;
+//    3)number of mute buttons
+    int numberOfMuteButtons = 16;
+//    4)length of fader travel
+    int lengthOfFaderTravelInMillimeters = 100;
+//    5)number solo buttons
+    int numberOfSoloButtons = 16;
+//3 things it can do:
+//    1)adjust levels
+    void faderHasChanged (int oldFaderValue, int newFaderValue);
+//    2)adjust pan
+    void panPitHasMoved (int oldPanValue, int newPanValue);
+//    3)mute track
+    void muteTrack (int trackNumber);
+};
 /*
 Thing 9)transport section
 5 properties:
@@ -300,6 +424,27 @@ Thing 9)transport section
     2)tap tempo
     3)arm a track
  */
+ struct TransportSection
+ {
+//5 properties:
+//    1)number of buttons
+    int numberOfButtons = 6;
+//    2)color of buttons
+    std::string colorOfButtons = "grey";
+//    3)size of the buttons
+    int sizeOfButtons = 2;
+//    4)spacing of buttons
+    int buttonSpacing = 2;
+//    5)transport position 
+    float postionOfTransport = 0.0f;
+//3 things it can do:
+//    1)move transport
+    void moveTransport(float currentTransportPosition, float destinationTransportPosition);
+//    2)tap tempo
+    void tapTempo (float timingInterval);
+//    3)arm a track
+    void armTrack (int trackNumber);
+ };
 
 /*
 Thing 10)MPK49KeyboardController
@@ -314,6 +459,26 @@ Thing 10)MPK49KeyboardController
     2)send midi notes
     3)control DAW
  */
+ struct MPK49KeyboardController
+ {
+//5 properties:
+//    1)keyboard assembly
+    KeyBoardAssembly keyboardAssembly;
+//    2)arpeggiator section
+    ArpeggiatorSection arpeggiatorSection;
+//    3)pads section
+    PadsSection padSection;
+//    4)mixer section
+    MixerSection mixerSection;
+//    5)transport section
+    TransportSection transportSection;
+//3 things it can do:
+//    1)trigger samples
+    void triggerSample (PadsSection padSection);
+//    2)send midi notes
+    void sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff);
+//    3)control DAW
+ };
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
