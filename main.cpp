@@ -132,7 +132,28 @@ Thing 1)oscilloscope
     2)graph the difference in electrical waveforms
     3)measure voltage
  */
+struct Oscilloscope
+{
+//5 properties:
+    //1)horizontal input
+    float horizontalInput = 0.0f;
+    //2)vertical input
+    float verticalInput = 0.0f;
+    //3)horizontal gain control
+    int horizontalGain = 0;
+    //4)vertical gain control
+    int verticalGain = 0;
+    //5)horizontal sweep control
+    int horizontalSweepControl = 0;
+//3 things it can do:
+    //1)graph voltage over time
+    void graphVoltageOverTime(float yInput, float sweep);
+    //2)graph the difference in electrical waveforms
+    void graphWaveformDifference (int channelA, int channelB);
+    //3)measure voltage
+    void measureVoltage (int channelA, int channelB);
 
+};
 
 /*
 Thing 2)cell phone
