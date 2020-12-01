@@ -130,73 +130,73 @@ Thing 4)parametric eq
  */
 
 /*
-Thing 5)
+Thing 5)keyboard assembly
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)number of keys
+    2)has aftertouch
+    3)whether or not the keys are weighted
+    4)key length
+    5)octave controls
 3 things it can do:
-    1)
-    2)
-    3)
+    1)send midi
+    2)send velocity
+    3)send aftertouch
  */
 
 /*
-Thing 6)
+Thing 6)arrpeggiator section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)number of patterns
+    2)latch function
+    3)tempo sync
+    4)arpeggiator pattern store
+    5)arpeggiator pattern edit
 3 things it can do:
-    1)
-    2)
-    3)
+    1)turn on or off arpeggio section
+    2)engage latching function
+    3)swap arpeggio pattern
  */
 
 /*
-Thing 7)
+Thing 7)pads section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)number of pads
+    2)velocity sensitive 
+    3)midi number
+    4)pad composition
+    5)softness
 3 things it can do:
-    1)
-    2)
-    3)
+    1)play beats
+    2)create sequences
+    3)control dynamics
  */
 
 /*
-Thing 8)
+Thing 8)mixer section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)number of faders
+    2)number of pan pots
+    3)number of mute buttons
+    4)length of fader travel
+    5)number solo buttons
 3 things it can do:
-    1)
-    2)
-    3)
+    1)adjust levels
+    2)adjust pan
+    3)mute track
  */
 
 /*
-Thing 9)
+Thing 9)transport section
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)number of buttons
+    2)color of buttons
+    3)size of the buttons
+    4)spacing of buttons
+    5)transport position 
 3 things it can do:
-    1)
-    2)
-    3)
+    1)move transport
+    2)tap tempo
+    3)arm a track
  */
 
 /*
