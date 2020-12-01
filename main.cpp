@@ -224,7 +224,26 @@ Thing 6)arrpeggiator section
     2)engage latching function
     3)swap arpeggio pattern
  */
-
+struct ArpeggiatorSection 
+{
+//     1)number of patterns
+    int numPatterns = 2;
+//     2)latch pattern
+    std::string latchFunction = "next beat";
+//     3)sync to tempo
+    bool syncedToTempo = false;
+//     4)arpeggiator pattern 1
+    std::string pattern1 = "x-x-x-x-"; //4 on the floor
+//     5)arpeggiator pattern 2
+    std::string pattern2 = "x--x--x-"; //
+// 3 things it can do:
+//     1)turn on or off arpeggio section
+    void turnOnArpeggioSection(bool isOn);
+//     2)store arpeggiator patter
+    void storeArpeggiatorPattern(std::string patterName);
+//     3)swap arpeggio pattern
+    void swapPattern( std::string newPattern, int targetToReplace);
+};
 /*
 Thing 7)pads section
 5 properties:
@@ -236,8 +255,23 @@ Thing 7)pads section
 3 things it can do:
     1)play beats
     2)create sequences
+    .
     3)control dynamics
  */
+struct PadsSection
+{
+// 5 properties:
+//     1)number of pads
+//     2)velocity sensitive 
+//     3)midi number
+//     4)pad composition
+//     5)softness
+// 3 things it can do:
+//     1)play beats
+//     2)create sequences
+    void createSequences(ArpeggiatorSection arpSection, int padNum);
+//     3)control dynamics
+};
 
 /*
 Thing 8)mixer section
