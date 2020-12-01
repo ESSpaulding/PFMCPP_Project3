@@ -109,17 +109,17 @@ Thing 4)parametric eq
  */
 
 /*
-Thing 10)
+Thing 10)MPK49KeyboardController
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1)keyboard assembly
+    2)arrpeggiator section
+    3)pads section
+    4)mixxer section
+    5)transport section
 3 things it can do:
-    1)
-    2)
-    3)
+    1)trigger samples
+    2)send midi notes
+    3)control DAW
  */
 
 /*
