@@ -185,8 +185,8 @@ struct CellPhone
     //5)whether or not it has a headphone port
     bool phoneHasHeadphoneJack = true;
    // 5) make 2 of the 10 user-defined types have a nested class. 
-   struct TouchScreen
-    {
+    struct TouchScreen
+    { FIXME: this should have 5 member variables and 3 member functions
         float screenHeight = 4.5f;
         float screenWidth = 3.0f;
         int x = 0, y = 0;
@@ -232,7 +232,7 @@ Thing 3)guitar
     int numberOfstrings = 6;
    //5) make 2 of the 10 user-defined types have a nested class. 
     struct Tremelo
-    {
+    { FIXME: this should have 5 member variables and 3 member functions
         int numberOfSprings = 3;
         bool isTremeloFloating = true;
         bool isTremeloLocking = true;
