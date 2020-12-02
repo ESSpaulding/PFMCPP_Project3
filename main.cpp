@@ -178,9 +178,11 @@ struct CellPhone
         float screenHeight = 4.5f;
         float screenWidth = 3.0f;
         int x = 0, y = 0;
+        int numberOfGestures = 3;
 
         void fingerPrintVerification(float ownersFinger, float usersFinger);
         void getFingerPosition(int X, int Y);
+        void quickSwipe(bool swipeUp, bool swipeDown);
     };
 //3 things it can do:
     //1)make calls
@@ -224,10 +226,12 @@ Thing 3)guitar
         int numberOfSprings = 3;
         bool isTremeloFloating = true;
         bool isTremeloLocking = true;
+        float fineTunerThreadPitch = 0.7f;
+        float massOfTremeloBlock = 34.5f;
 
-        void Flutter(float startFrequency, float endFrequency, float flutterRate);
-        void diveBomb(float startFrequency, float endFrequency, float pitchDecentTime);
-    
+        void Flutter (float startFrequency, float endFrequency, float flutterRate);
+        void diveBomb (float startFrequency, float endFrequency, float pitchDecentTime);
+        void squeelies (float harmonics, float decay);   
     };
     //3 things it can do:
     //1)tune the strings
