@@ -158,19 +158,7 @@ struct Oscilloscope
 
 };
 
-/*
-Thing 2)cell phone
-5 properties:
-    1)carrier
-    2)screen size
-    3)amount of RAM
-    4)whether or not is has a SD card port
-    5)whether or not it has a headphone port
-3 things it can do:
-    1)make calls
-    2)play games
-    3)send emails
- */
+
 struct CellPhone
 {
 //5 properties:
@@ -204,19 +192,7 @@ struct CellPhone
 
     TouchScreen touchScreen;
 };
-/*
-Thing 3)guitar
-5 properties:
-    1)wood type
-    2)number of frets
-    3)scale length
-    4)whether or not it has a tremelo bridge
-    5)number of strings
-3 things it can do:
-    1)tune the strings
-    2)play a melody
-    3)strum a chord
- */
+
  struct Guitar
  {
     //5 properties:
@@ -252,19 +228,7 @@ Thing 3)guitar
     Tremelo tremelo;
  };
 
-/*
-Thing 4)parametric eq
-5 properties:
-    1)Low shelf frequency
-    2)Hight shelf frequency
-    3)Center band frequency
-    4)center band gain
-    5)center band slope
-3 things it can do:
-    1)de-ess vocals
-    2)filter rumble
-    3)kill feedback
- */
+
 struct ParametricEq
 {
     //5 properties:
@@ -286,19 +250,7 @@ struct ParametricEq
     //3)kill feedback
     void killFeedback (float feedbackFrequency, float gainReduction);
 };
-/*
-Thing 5)keyboard assembly
-5 properties:
-    1)number of keys
-    2)has aftertouch
-    3)whether or not the keys are weighted
-    4)key length
-    5)octave controls
-3 things it can do:
-    1)send midi
-    2)shift octaves
-    3)send aftertouch
- */
+
 struct KeyBoardAssembly
 {
     //5 properties:
@@ -320,19 +272,7 @@ struct KeyBoardAssembly
     //3)send aftertouch
     void sendMidiAfterTouch (int channel, int midiAfterTouch);
 };
-/*
-Thing 6)arrpeggiator section
-5 properties:
-    1)number of patterns
-    2)latch function
-    3)tempo sync
-    4)arpeggiator pattern store
-    5)arpeggiator pattern edit
-3 things it can do:
-    1)turn on or off arpeggio section
-    2)engage latching function
-    3)swap arpeggio pattern
- */
+
 struct ArpeggiatorSection 
 {
 //     1)number of patterns
@@ -353,19 +293,7 @@ struct ArpeggiatorSection
 //     3)swap arpeggio pattern
     void swapPattern( std::string newPattern, int targetToReplace);
 };
-/*
-Thing 7)pads section
-5 properties:
-    1)number of pads
-    2)velocity sensitive 
-    3)midi number
-    4)pad composition
-    5)softness
-3 things it can do:
-    1)play beats
-    2)create sequences
-    3)control dynamics
- */
+
 struct PadsSection
 {
 // 5 properties:
@@ -388,19 +316,7 @@ struct PadsSection
     void dynamicControl (int maxVelocity, int minVelocity);
 };
 
-/*
-Thing 8)mixer section
-5 properties:
-    1)number of faders
-    2)number of pan pots
-    3)number of mute buttons
-    4)length of fader travel
-    5)number solo buttons
-3 things it can do:
-    1)adjust levels
-    2)adjust pan
-    3)mute track
- */
+
 struct MixerSection
 {
 //Thing 8)mixer section
@@ -423,19 +339,7 @@ struct MixerSection
 //    3)mute track
     void muteTrack (int trackNumber);
 };
-/*
-Thing 9)transport section
-5 properties:
-    1)number of buttons
-    2)color of buttons
-    3)size of the buttons
-    4)spacing of buttons
-    5)transport position 
-3 things it can do:
-    1)move transport
-    2)tap tempo
-    3)arm a track
- */
+
  struct TransportSection
  {
 //5 properties:
@@ -458,19 +362,7 @@ Thing 9)transport section
     void armTrack (int trackNumber);
  };
 
-/*
-Thing 10)MPK49KeyboardController
-5 properties:
-    1)keyboard assembly
-    2)arrpeggiator section
-    3)pads section
-    4)mixxer section
-    5)transport section
-3 things it can do:
-    1)trigger samples
-    2)send midi notes
-    3)control DAW
- */
+
  struct MPK49KeyboardController
  {
 //5 properties:
@@ -491,20 +383,6 @@ Thing 10)MPK49KeyboardController
     void sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff);
 //    3)control DAW
  };
-
-/*
- MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
-
- Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
- 
- If you didn't already: 
-    Make a pull request after you make your first commit
-    pin the pull request link and this repl.it link to our DM thread in a single message.
-
- send me a DM to review your pull request when the project is ready for review.
-
- Wait for my code review.
- */
 
 #include <iostream>
 int main()
