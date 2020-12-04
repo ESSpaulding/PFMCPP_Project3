@@ -131,6 +131,8 @@ struct Person
 
 void Person::run(int howFast, bool startWithLeftFoot)  
 {
+    howFast++;
+
     if( startWithLeftFoot == true )
     {
         leftFoot.stepForward();
@@ -151,7 +153,7 @@ void Person::Foot::stepForward()
 
 int Person::Foot::stepSize()
 {
-    std::cout << "one small step for man..." << std::endl;
+    return 10;
 }
 
  /*
