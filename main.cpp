@@ -107,10 +107,52 @@ struct CarWash
     you should be able to deduce the return type of those functions based on their usage in Person::run()
     You'll need to insert the Person struct from the video in the space below.
  */
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
 
+    struct Foot
+    {      
+        bool startWithLeftFoot = true;
 
+        void stepForward ();
+        int stepSize();
+    };
 
+    void run(int howFast, bool startWithLeftFoot);
 
+    Foot leftFoot, rightFoot;
+};
+
+void Person::run(int howFast, bool startWithLeftFoot)  
+{
+    if( startWithLeftFoot == true )
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    }
+    else 
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+}
+
+void Person::Foot::stepForward()
+{
+    std::cout << "stepping forward sir" << std::endl;
+}
+
+int Person::Foot::stepSize()
+{
+    std::cout << "one small step for man..." << std::endl;
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -121,268 +163,323 @@ struct CarWash
  4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
  */
 
-
-/*
-Thing 1)oscilloscope
-5 properties:
-    1)horizontal input
-    2)vertical input
-    3)horizontal gain control
-    4)vertical gain control
-    5)horizontal sweep control
-3 things it can do:
-    1)graph voltage over time
-    2)graph the difference in electrical waveforms
-    3)measure voltage
- */
 struct Oscilloscope
 {
-//5 properties:
-    //1)horizontal input
     float horizontalInput = 0.0f;
-    //2)vertical input
     float verticalInput = 0.0f;
-    //3)horizontal gain control
     int horizontalGain = 0;
-    //4)vertical gain control
     int verticalGain = 0;
-    //5)horizontal sweep control
     int horizontalSweepControl = 0;
-//3 things it can do:
-    //1)graph voltage over time
-    void graphVoltageOverTime(float yInput, float sweep);
-    //2)graph the difference in electrical waveforms
-    void graphWaveformDifference (int channelA, int channelB);
-    //3)measure voltage
-    void measureVoltage (int channelA, int channelB);
 
+    void graphVoltageOverTime(float yInput, float sweep);
+    void graphWaveformDifference (int channelA, int channelB);
+    void measureVoltage (int channelA, int channelB);
 };
+
+void Oscilloscope::graphVoltageOverTime(float yInput, float sweep)
+{
+    std::cout << yInput << sweep << std::endl;
+}
+
+void Oscilloscope::graphWaveformDifference (int channelA, int channelB)
+{
+    std::cout << channelA << channelB << std::endl;
+}
+
+void Oscilloscope::measureVoltage (int channelA, int channelB)
+{
+    std::cout << channelA << channelB << std::endl;
+}
 
 
 struct CellPhone
 {
-//5 properties:
-    //1)carrier
     std::string carrier = "Sprint";
-    //2)screen size
     int screenSize = 3;
-    //3)amount of RAM
     int gigabytesOfRAM = 8;
-    //4)whether or not is has a SD card port
     bool hasSDCardPort = false;
-    //5)whether or not it has a headphone port
     bool phoneHasHeadphoneJack = true;
-   // 5) make 2 of the 10 user-defined types have a nested class. 
+
     struct TouchScreen
-    { FIXME: this should have 5 member variables and 3 member functions
+    { 
         float screenHeight = 4.5f;
         float screenWidth = 3.0f;
         int x = 0, y = 0;
+        int numberOfGestures = 3;
 
         void fingerPrintVerification(float ownersFinger, float usersFinger);
         void getFingerPosition(int X, int Y);
+        void quickSwipe(bool swipeUp, bool swipeDown);
     };
-//3 things it can do:
-    //1)make calls
+
     void makeCall (int phoneNumber, std::string personYouAreCalling);
-    //2)play games
     void playGame (bool gameMode);
-    //3)send emails
     void sendEmail (std::string emailAddress);
 
     TouchScreen touchScreen;
 };
 
+void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
+{
+    std::cout << phoneNumber << personYouAreCalling << std::endl;
+}
+
+void CellPhone::playGame (bool gameMode)
+{
+    std::cout << gameMode << std::endl;
+}
+
+void CellPhone::sendEmail (std::string emailAddress)
+{
+    std::cout << emailAddress << std::endl;
+}
+
+void CellPhone::TouchScreen::fingerPrintVerification(float ownersFinger, float usersFinger)
+{
+    std::cout << ownersFinger << usersFinger << std::endl;
+}
+void CellPhone::TouchScreen::getFingerPosition(int X, int Y)
+{
+    std::cout << X << Y << std::endl;
+}
+void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
+{
+    std::cout << swipeUp << swipeDown << std::endl;
+}
+
+
  struct Guitar
  {
-    //5 properties:
-    //1)wood type
     std::string woodType = "mahogany";
-    //2)number of frets
     int numberOfFrets = 22;
-    //3)scale length
     float scaleLength = 24.75f;
-    //4)whether or not it has a tremelo bridge
     bool hasTremeloBridge = true;
-    //5)number of strings
     int numberOfstrings = 6;
-   //5) make 2 of the 10 user-defined types have a nested class. 
+
     struct Tremelo
-    { FIXME: this should have 5 member variables and 3 member functions
+    { 
         int numberOfSprings = 3;
         bool isTremeloFloating = true;
         bool isTremeloLocking = true;
+        float fineTunerThreadPitch = 0.7f;
+        float massOfTremeloBlock = 34.5f;
 
-        void Flutter(float startFrequency, float endFrequency, float flutterRate);
+        void flutter(float startFrequency, float endFrequency, float flutterRate);
         void diveBomb(float startFrequency, float endFrequency, float pitchDecentTime);
-    
+        void squeelies (float harmonics, float decay);
     };
-    //3 things it can do:
-    //1)tune the strings
+    
     void tuneTheStrings (float pitchToTuneTo, int stringToTune);
-    //2)play a melody
     void playMelody (std::string notesOfScale, std::string keyToPlayIn);
-    //3)strum a chord
     void strumChord (std::string rootNote, bool chordHasMinorThird, bool chordHasMinorSeventh);
 
     Tremelo tremelo;
  };
 
+void Guitar::tuneTheStrings (float pitchToTuneTo, int stringToTune)
+{
+    std::cout << pitchToTuneTo << stringToTune << std::endl;
+}
+void Guitar::playMelody (std::string notesOfScale, std::string keyToPlayIn)
+{
+    std::cout << notesOfScale << keyToPlayIn << std::endl;
+}
+void Guitar::strumChord (std::string rootNote, bool chordHasMinorThird, bool chordHasMinorSeventh)
+{
+    std::cout << rootNote << chordHasMinorThird << chordHasMinorSeventh << std::endl;
+}
+
+void Guitar::Tremelo::flutter(float startFrequency, float endFrequency, float flutterRate)
+{
+    std::cout << startFrequency << endFrequency << flutterRate << std::endl;
+}
+void Guitar::Tremelo::diveBomb(float startFrequency, float endFrequency, float pitchDecentTime)
+{
+    std::cout << startFrequency << endFrequency << pitchDecentTime << std::endl;
+}
+void Guitar::Tremelo::squeelies (float harmonics, float decay)
+{
+    std::cout << harmonics << decay << std::endl;
+}
 
 struct ParametricEq
 {
-    //5 properties:
-    //1)Low shelf frequency
     float lowShelfFrequency = 50.0f;
-    //2)Hight shelf frequency
     float highShelfFrequency = 18000.0f;
-    //3)Center band frequency
     float centerBandFrequency = 1000.0f;
-    //4)center band gain
     float centerBandGain = 0.5f;
-    //5)center band slope
     float centerBandSlope = 0.7f;
-    //3 things it can do:
-    //1)de-ess vocals
+
     void vocalDeEss (float sibilanceAmount, float sibilanceSuppression);
-    //2)filter rumble
     void rumbleFilter (float rumbleFrequency, float filterCut);
-    //3)kill feedback
     void killFeedback (float feedbackFrequency, float gainReduction);
 };
 
+void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression)
+{
+    std::cout << sibilanceAmount << sibilanceSuppression << std::endl;
+}
+void ParametricEq::rumbleFilter (float rumbleFrequency, float filterCut)
+{
+    std::cout << rumbleFrequency << filterCut << std::endl;
+}
+void ParametricEq::killFeedback (float feedbackFrequency, float gainReduction)
+{
+    std::cout << feedbackFrequency << gainReduction << std::endl;
+}
+
 struct KeyBoardAssembly
 {
-    //5 properties:
-    //1)number of keys
     int numberOfKeys = 88;
-    //2)has aftertouch
     bool keyHasAfterTouch = true;
-    //3)whether or not the keys are weighted
     bool keysAreWeighted = true;
-    //4)key length
     float keyLength = 5.5f;
-    //5)octave controls
     int octaveControls = 2;
-    //3 things it can do:
-    //1)send midi
+
     void sendMidi (int channel, int midiNote, int velocity);
-    //2)shift octaves
     void shiftOctave (bool octaveShiftUp, bool octaveShiftDown);
-    //3)send aftertouch
     void sendMidiAfterTouch (int channel, int midiAfterTouch);
 };
 
+void KeyBoardAssembly::sendMidi (int channel, int midiNote, int velocity)
+{
+    std::cout << channel << midiNote << velocity << std::endl;
+}
+void KeyBoardAssembly::shiftOctave (bool octaveShiftUp, bool octaveShiftDown)
+{
+    std::cout << octaveShiftUp << octaveShiftDown << std::endl;
+}
+void KeyBoardAssembly::sendMidiAfterTouch (int channel, int midiAfterTouch)
+{
+    std::cout << channel << midiAfterTouch << std::endl;
+}
+
+
 struct ArpeggiatorSection 
 {
-//     1)number of patterns
     int numPatterns = 2;
-//     2)latch pattern
     std::string latchFunction = "next beat";
-//     3)sync to tempo
     bool syncedToTempo = false;
-//     4)arpeggiator pattern 1
     std::string pattern1 = "x-x-x-x-"; //4 on the floor
-//     5)arpeggiator pattern 2
     std::string pattern2 = "x--x--x-"; //
-// 3 things it can do:
-//     1)turn on or off arpeggio section
+
     void turnOnArpeggioSection(bool isOn);
-//     2)store arpeggiator pattern
     void storeArpeggiatorPattern(std::string patterName);
-//     3)swap arpeggio pattern
     void swapPattern( std::string newPattern, int targetToReplace);
 };
 
+void ArpeggiatorSection::turnOnArpeggioSection(bool isOn)
+{
+    std::cout << isOn << std::endl;
+}
+void ArpeggiatorSection::storeArpeggiatorPattern(std::string patterName)
+{
+    std::cout << patterName << std::endl;
+}
+void ArpeggiatorSection::swapPattern( std::string newPattern, int targetToReplace)
+{
+    std::cout << newPattern << targetToReplace << std::endl;
+}
+
 struct PadsSection
 {
-// 5 properties:
-//     1)number of pads
     int numberOfPads = 9;
-//     2)velocity sensitive 
     bool padsAreVelocitySensitive = true;
-//     3)midi number
     int midiNumber = 127;
-//     4)pad composition
     std::string padComposition = "foam rubber";
-//     5)softness
     std::string durometerOfPad = "bouncy af";
-// 3 things it can do:
-//     1)play beats
-    void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose parameter is a UDT.
-//     2)create sequences
+
+    void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose 
     void createSequences (ArpeggiatorSection arpSection, int padNum);
-//     3)control dynamics
     void dynamicControl (int maxVelocity, int minVelocity);
 };
 
+void PadsSection::playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard) //4) a member function whose 
+{
+    std::cout << midiNoteRecord << beatQuantize << keyboard.numberOfKeys << std::endl;  
+}
+void PadsSection::createSequences (ArpeggiatorSection arpSection, int padNum)
+{
+    std::cout << padNum << arpSection.numPatterns << std::endl;  //
+    
+}
+void PadsSection::dynamicControl (int maxVelocity, int minVelocity)
+{
+    std::cout << maxVelocity << minVelocity << std::endl;
+}
 
 struct MixerSection
 {
-//Thing 8)mixer section
-//5 properties:
-//    1)number of faders
     int numberOfFaders = 8;
-//    2)number of pan pots
     int numberOfPanPots = 8;
-//    3)number of mute buttons
     int numberOfMuteButtons = 16;
-//    4)length of fader travel
     int lengthOfFaderTravelInMillimeters = 100;
-//    5)number solo buttons
     int numberOfSoloButtons = 16;
-//3 things it can do:
-//    1)adjust levels
+
     void faderHasChanged (int oldFaderValue, int newFaderValue);
-//    2)adjust pan
-    void panPitHasMoved (int oldPanValue, int newPanValue);
-//    3)mute track
+    void panPotHasMoved (int oldPanValue, int newPanValue);
     void muteTrack (int trackNumber);
 };
 
+void MixerSection::faderHasChanged (int oldFaderValue, int newFaderValue)
+{
+    std::cout << oldFaderValue << newFaderValue << std::endl;
+}
+void MixerSection::panPotHasMoved (int oldPanValue, int newPanValue)
+{
+    std::cout << oldPanValue << newPanValue << std::endl;
+}
+void MixerSection::muteTrack (int trackNumber)
+{
+    std::cout << trackNumber << std::endl;
+}
+
  struct TransportSection
  {
-//5 properties:
-//    1)number of buttons
     int numberOfButtons = 6;
-//    2)color of buttons
     std::string colorOfButtons = "grey";
-//    3)size of the buttons
     int sizeOfButtons = 2;
-//    4)spacing of buttons
     int buttonSpacing = 2;
-//    5)transport position 
     float postionOfTransport = 0.0f;
-//3 things it can do:
-//    1)move transport
+
     void moveTransport(float currentTransportPosition, float destinationTransportPosition);
-//    2)tap tempo
     void tapTempo (float timingInterval);
-//    3)arm a track
     void armTrack (int trackNumber);
  };
 
+void TransportSection::moveTransport(float currentTransportPosition, float destinationTransportPosition)
+{
+    std::cout << currentTransportPosition << destinationTransportPosition << std::endl;
+}
+void TransportSection::tapTempo (float timingInterval)
+{
+    std::cout << timingInterval << std::endl;
+}
+void TransportSection::armTrack (int trackNumber)
+{
+    std::cout << trackNumber << std::endl;
+}
 
  struct MPK49KeyboardController
  {
-//5 properties:
-//    1)keyboard assembly
     KeyBoardAssembly keyboardAssembly;
-//    2)arpeggiator section
     ArpeggiatorSection arpeggiatorSection;
-//    3)pads section
     PadsSection padSection;
-//    4)mixer section
     MixerSection mixerSection;
-//    5)transport section
     TransportSection transportSection;
-//3 things it can do:
-//    1)trigger samples
+
     void triggerSample (PadsSection padSection);
-//    2)send midi notes
     void sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff);
-//    3)control DAW
  };
+
+void MPK49KeyboardController::triggerSample (PadsSection p)
+{
+    std::cout << p.midiNumber << std::endl;
+}
+void MPK49KeyboardController::sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff)
+{
+    std::cout << noteNumber << noteOn << velocity << noteOff << std::endl;
+}
 
 #include <iostream>
 int main()
