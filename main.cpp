@@ -7,6 +7,9 @@
 
  On this new branch:
 
+ 0) if you opted to not fill in any of your member functions in part2, 
+    fill in ALL of your member functions
+    
  1) Add a constructor for each User-Defined-Type.
  
  2) amend some of your UDT's member functions to print out something interesting via std::cout
@@ -58,6 +61,9 @@ int main()
 } //end namespace Example
 
 //insert Example::main() into main() of user's repo.
+
+
+
 
 struct Oscilloscope
 {
