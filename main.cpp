@@ -27,7 +27,8 @@
  */
 
 #include <iostream>
-namespace Example 
+
+namespace Example
 {
 struct UDT  // my user defined type named 'UDT'
 {
@@ -62,21 +63,30 @@ int main()
 
 //insert Example::main() into main() of user's repo.
 
-
-
-
 struct Oscilloscope
 {
-    float horizontalInput = 0.0f;
-    float verticalInput = 0.0f;
-    int horizontalGain = 0;
-    int verticalGain = 0;
-    int horizontalSweepControl = 0;
+    float horizontalInput;
+    float verticalInput;
+    int horizontalGain;
+    int verticalGain;
+    int horizontalSweepControl;
+
+    Oscilloscope(); //constructor
 
     void graphVoltageOverTime(float yInput, float sweep);
     void graphWaveformDifference (int channelA, int channelB);
     void measureVoltage (int channelA, int channelB);
 };
+
+Oscilloscope::Oscilloscope() :        //Constructor intializer list
+horizontalInput(0.0f),
+verticalInput(0.0f),
+horizontalGain(0),
+verticalGain(0),
+horizontalSweepControl(0)
+{
+
+}
 
 void Oscilloscope::graphVoltageOverTime(float yInput, float sweep)
 {
@@ -85,12 +95,12 @@ void Oscilloscope::graphVoltageOverTime(float yInput, float sweep)
 
 void Oscilloscope::graphWaveformDifference (int channelA, int channelB)
 {
-    std::cout << channelA << channelB << std::endl;
+    std::cout << "The difference voltage between channelA and channelB is: " << channelB - channelA << std::endl;
 }
 
 void Oscilloscope::measureVoltage (int channelA, int channelB)
 {
-    std::cout << channelA << channelB << std::endl;
+    std::cout << "The combined voltage of channelA and channelB is: " << channelA + channelB << std::endl;
 }
 
 
@@ -101,15 +111,15 @@ struct CellPhone
     int gigabytesOfRAM = 8;
     bool hasSDCardPort = false;
     bool phoneHasHeadphoneJack = true;
-
+    CellPhone();
     struct TouchScreen
-    { 
+    {
         float screenHeight = 4.5f;
         float screenWidth = 3.0f;
         int x = 0, y = 0;
         int numberOfGestures = 3;
-
-        void fingerPrintVerification(float ownersFinger, float usersFinger);
+        TouchScreen();
+        void fingerPrintVerification(bool ownersFinger, bool usersFinger);
         void getFingerPosition(int X, int Y);
         void quickSwipe(bool swipeUp, bool swipeDown);
     };
@@ -121,9 +131,12 @@ struct CellPhone
     TouchScreen touchScreen;
 };
 
+CellPhone::CellPhone()  {}  //constructor in-class intialization
+CellPhone::TouchScreen::TouchScreen()  {} //nested constructor in-class intialization
+
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
-    std::cout << phoneNumber << personYouAreCalling << std::endl;
+    std::cout << "Hello " << phoneNumber << " this is " << personYouAreCalling << " Speaking" << std::endl;
 }
 
 void CellPhone::playGame (bool gameMode)
@@ -136,13 +149,13 @@ void CellPhone::sendEmail (std::string emailAddress)
     std::cout << emailAddress << std::endl;
 }
 
-void CellPhone::TouchScreen::fingerPrintVerification(float ownersFinger, float usersFinger)
+void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
-    std::cout << ownersFinger << usersFinger << std::endl;
+     std::cout << "This is " << (ownersFinger == usersFinger ? "your phone" : "not your phone") << "\n";
 }
 void CellPhone::TouchScreen::getFingerPosition(int X, int Y)
 {
-    std::cout << X << Y << std::endl;
+    std::cout << "X coordinate is " << X << " Y coordinate is " << Y  << std::endl;
 }
 void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
 {
@@ -153,19 +166,19 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
  struct Guitar
  {
     std::string woodType = "mahogany";
-    int numberOfFrets = 22;
-    float scaleLength = 24.75f;
-    bool hasTremeloBridge = true;
-    int numberOfstrings = 6;
-
+    int numberOfFrets;
+    float scaleLength;
+    bool hasTremeloBridge;
+    int numberOfstrings;
+    Guitar();
     struct Tremelo
-    { 
+    {
         int numberOfSprings = 3;
         bool isTremeloFloating = true;
         bool isTremeloLocking = true;
         float fineTunerThreadPitch = 0.7f;
         float massOfTremeloBlock = 34.5f;
-
+        Tremelo();
         void flutter(float startFrequency, float endFrequency, float flutterRate);
         void diveBomb(float startFrequency, float endFrequency, float pitchDecentTime);
         void squeelies (float harmonics, float decay);
@@ -178,6 +191,10 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
     Tremelo tremelo;
  };
 
+Guitar::Guitar() : numberOfFrets(22), scaleLength(26.5), hasTremeloBridge(true), numberOfstrings(8) {}
+Guitar::Tremelo::Tremelo() {}  //constructor in-class initialization. no colon needed... interesting
+
+
 void Guitar::tuneTheStrings (float pitchToTuneTo, int stringToTune)
 {
     std::cout << pitchToTuneTo << stringToTune << std::endl;
@@ -188,7 +205,8 @@ void Guitar::playMelody (std::string notesOfScale, std::string keyToPlayIn)
 }
 void Guitar::strumChord (std::string rootNote, bool chordHasMinorThird, bool chordHasMinorSeventh)
 {
-    std::cout << rootNote << chordHasMinorThird << chordHasMinorSeventh << std::endl;
+    std::cout << "the chord you are strumming is "<< rootNote << (chordHasMinorThird ? "minor" : "major");
+    std::cout << (chordHasMinorSeventh ? "b7" : "7") << std::endl;
 }
 
 void Guitar::Tremelo::flutter(float startFrequency, float endFrequency, float flutterRate)
@@ -197,7 +215,7 @@ void Guitar::Tremelo::flutter(float startFrequency, float endFrequency, float fl
 }
 void Guitar::Tremelo::diveBomb(float startFrequency, float endFrequency, float pitchDecentTime)
 {
-    std::cout << startFrequency << endFrequency << pitchDecentTime << std::endl;
+    std::cout << "Divebombs are cool " << startFrequency * (endFrequency + pitchDecentTime) << std::endl;
 }
 void Guitar::Tremelo::squeelies (float harmonics, float decay)
 {
@@ -206,28 +224,34 @@ void Guitar::Tremelo::squeelies (float harmonics, float decay)
 
 struct ParametricEq
 {
-    float lowShelfFrequency = 50.0f;
-    float highShelfFrequency = 18000.0f;
-    float centerBandFrequency = 1000.0f;
-    float centerBandGain = 0.5f;
-    float centerBandSlope = 0.7f;
-
+    float lowShelfFrequency;
+    float highShelfFrequency;
+    float centerBandFrequency;
+    float centerBandGain;
+    float centerBandSlope;
+    ParametricEq();
     void vocalDeEss (float sibilanceAmount, float sibilanceSuppression);
     void rumbleFilter (float rumbleFrequency, float filterCut);
     void killFeedback (float feedbackFrequency, float gainReduction);
 };
-
+ParametricEq::ParametricEq() :
+lowShelfFrequency(50.0f),
+highShelfFrequency(1800.0f),
+centerBandFrequency(0.5f),
+centerBandGain(0.5f),
+centerBandSlope(0.7f)
+{}
 void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression)
 {
     std::cout << sibilanceAmount << sibilanceSuppression << std::endl;
 }
 void ParametricEq::rumbleFilter (float rumbleFrequency, float filterCut)
 {
-    std::cout << rumbleFrequency << filterCut << std::endl;
+    std::cout << " Hear my train a coming " << rumbleFrequency << filterCut << std::endl;
 }
 void ParametricEq::killFeedback (float feedbackFrequency, float gainReduction)
 {
-    std::cout << feedbackFrequency << gainReduction << std::endl;
+    std::cout << "EEEEEEE " << feedbackFrequency << gainReduction << std::endl;
 }
 
 struct KeyBoardAssembly
@@ -237,46 +261,48 @@ struct KeyBoardAssembly
     bool keysAreWeighted = true;
     float keyLength = 5.5f;
     int octaveControls = 2;
-
+    KeyBoardAssembly();
     void sendMidi (int channel, int midiNote, int velocity);
     void shiftOctave (bool octaveShiftUp, bool octaveShiftDown);
     void sendMidiAfterTouch (int channel, int midiAfterTouch);
 };
+KeyBoardAssembly::KeyBoardAssembly() {}  //constructor in-class initialization
 
 void KeyBoardAssembly::sendMidi (int channel, int midiNote, int velocity)
 {
-    std::cout << channel << midiNote << velocity << std::endl;
+    std::cout << "Channel: " << channel << " Note:  " << midiNote << " Velocity: " << velocity << std::endl;
 }
 void KeyBoardAssembly::shiftOctave (bool octaveShiftUp, bool octaveShiftDown)
 {
-    std::cout << octaveShiftUp << octaveShiftDown << std::endl;
+    std::cout << "shifting octave " << octaveShiftUp << octaveShiftDown << std::endl;
 }
 void KeyBoardAssembly::sendMidiAfterTouch (int channel, int midiAfterTouch)
 {
-    std::cout << channel << midiAfterTouch << std::endl;
+    std::cout << "channel: "<< channel << " after touch: " << midiAfterTouch << std::endl;
 }
 
 
-struct ArpeggiatorSection 
+struct ArpeggiatorSection
 {
     int numPatterns = 2;
     std::string latchFunction = "next beat";
     bool syncedToTempo = false;
     std::string pattern1 = "x-x-x-x-"; //4 on the floor
     std::string pattern2 = "x--x--x-"; //
-
+    ArpeggiatorSection();
     void turnOnArpeggioSection(bool isOn);
     void storeArpeggiatorPattern(std::string patterName);
     void swapPattern( std::string newPattern, int targetToReplace);
 };
+ArpeggiatorSection::ArpeggiatorSection() {}
 
 void ArpeggiatorSection::turnOnArpeggioSection(bool isOn)
 {
-    std::cout << isOn << std::endl;
+    std::cout << (isOn ? "Arpeggiator section is ON " : "Arpeggiator section is OFF") << std::endl;
 }
 void ArpeggiatorSection::storeArpeggiatorPattern(std::string patterName)
 {
-    std::cout << patterName << std::endl;
+    std::cout << "Current Pattern name is: " << patterName << std::endl;
 }
 void ArpeggiatorSection::swapPattern( std::string newPattern, int targetToReplace)
 {
@@ -290,19 +316,20 @@ struct PadsSection
     int midiNumber = 127;
     std::string padComposition = "foam rubber";
     std::string durometerOfPad = "bouncy af";
-
-    void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose 
+    PadsSection();
+    void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose
     void createSequences (ArpeggiatorSection arpSection, int padNum);
     void dynamicControl (int maxVelocity, int minVelocity);
 };
+PadsSection::PadsSection() {}
 
-void PadsSection::playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard) //4) a member function whose 
+void PadsSection::playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard)
 {
-    std::cout << midiNoteRecord << beatQuantize << keyboard.numberOfKeys << std::endl;  
+    std::cout << " Boom " << midiNoteRecord << beatQuantize << keyboard.numberOfKeys << std::endl;
 }
 void PadsSection::createSequences (ArpeggiatorSection arpSection, int padNum)
 {
-    std::cout << padNum << arpSection.numPatterns << std::endl;  //
+    std::cout << "create sequences: "<< padNum << "# of patterns: " <<arpSection.numPatterns << std::endl;
     
 }
 void PadsSection::dynamicControl (int maxVelocity, int minVelocity)
@@ -312,16 +339,22 @@ void PadsSection::dynamicControl (int maxVelocity, int minVelocity)
 
 struct MixerSection
 {
-    int numberOfFaders = 8;
-    int numberOfPanPots = 8;
-    int numberOfMuteButtons = 16;
-    int lengthOfFaderTravelInMillimeters = 100;
-    int numberOfSoloButtons = 16;
-
+    int numberOfFaders;
+    int numberOfPanPots;
+    int numberOfMuteButtons;
+    int lengthOfFaderTravelInMillimeters;
+    int numberOfSoloButtons;
+    MixerSection();
     void faderHasChanged (int oldFaderValue, int newFaderValue);
     void panPotHasMoved (int oldPanValue, int newPanValue);
     void muteTrack (int trackNumber);
 };
+MixerSection::MixerSection() :
+numberOfFaders(8),
+numberOfPanPots(8),
+numberOfMuteButtons(16),
+numberOfSoloButtons(16)
+{}
 
 void MixerSection::faderHasChanged (int oldFaderValue, int newFaderValue)
 {
@@ -343,11 +376,12 @@ void MixerSection::muteTrack (int trackNumber)
     int sizeOfButtons = 2;
     int buttonSpacing = 2;
     float postionOfTransport = 0.0f;
-
+    TransportSection();
     void moveTransport(float currentTransportPosition, float destinationTransportPosition);
     void tapTempo (float timingInterval);
     void armTrack (int trackNumber);
  };
+TransportSection::TransportSection() {}
 
 void TransportSection::moveTransport(float currentTransportPosition, float destinationTransportPosition)
 {
@@ -369,10 +403,11 @@ void TransportSection::armTrack (int trackNumber)
     PadsSection padSection;
     MixerSection mixerSection;
     TransportSection transportSection;
-
+    MPK49KeyboardController();
     void triggerSample (PadsSection padSection);
     void sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff);
  };
+MPK49KeyboardController::MPK49KeyboardController() {}
 
 void MPK49KeyboardController::triggerSample (PadsSection p)
 {
@@ -386,6 +421,53 @@ void MPK49KeyboardController::sendMidiNotes(int noteNumber, int noteOn, int velo
 #include <iostream>
 int main()
 {
+    std::cout << "we are in the main function" << std::endl;
+    Oscilloscope oScope;  //3) instatiation of UDT
+    oScope.measureVoltage(2, 4);
+    oScope.graphWaveformDifference(32, 16);
+
+    CellPhone myPhone;
+    CellPhone yourPhone;
+    myPhone.makeCall(231345632, "Karen");
+    CellPhone::TouchScreen myTouchscreen;
+    myTouchscreen.fingerPrintVerification(true, false);
+    yourPhone.makeCall(8675301, "Daryl");
+    CellPhone::TouchScreen yourTouchscreen;
+    yourTouchscreen.fingerPrintVerification(true, true);
+
+    Guitar myGuitar;
+    myGuitar.strumChord("A", true, true);
+    myGuitar.tremelo.diveBomb(440.0f, 0.1f, 1000.0f);
+
+    ParametricEq pEq;
+    pEq.rumbleFilter(30.0f, 120.0f);
+    pEq.killFeedback(220, -.5f);
+
+    KeyBoardAssembly keyBoard;
+    keyBoard.sendMidi(11, 122, 127);  
+    keyBoard.shiftOctave(true, false);
+    keyBoard.sendMidiAfterTouch(2, 127);
+
+    ArpeggiatorSection arpSection;
+    arpSection.turnOnArpeggioSection(true);
+    arpSection.storeArpeggiatorPattern("bouncing triplet");
+
+    PadsSection rightPadSection;
+    PadsSection leftPadSection;
+    rightPadSection.numberOfPads = 10;  //setting a value count for anything?
+    leftPadSection.dynamicControl(127, 12);
+    
+    MixerSection mixerSection;
+    mixerSection.faderHasChanged(10, 9);
+    mixerSection.muteTrack(12);
+
+    TransportSection transportSection;
+    transportSection.moveTransport(0.0f, 100.5f);
+
+    MPK49KeyboardController keyController;
+    keyController.sendMidiNotes(122, 38, 127, 38);
+
     Example::main();
     std::cout << "good to go!" << std::endl;
 }
+
