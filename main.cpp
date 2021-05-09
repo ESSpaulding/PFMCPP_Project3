@@ -1,25 +1,28 @@
 /*
- Project 3 - Part 4 / 5
- video: Chapter 2 - Part 9
- Member initialization tasks
+  Project 3 - Part 4 / 5
+  video: Chapter 2 - Part 9
+  Member initialization tasks
 
- Create a branch named Part4
- 
- 1) initialize some of your member variables either in-class or in the Constructor member initializer list.
+  Create a branch named Part4
+  
+  1) initialize some of your member variables either in-class or in the Constructor member initializer list.
 
- 2) make some of your member functions use those initialized member variables via std::cout statements.
+  2) make some of your member functions use those initialized member variables via std::cout statements.
+  
+  3) click the [run] button.  Clear up any errors or warnings as best you can.
  
- 3) click the [run] button.  Clear up any errors or warnings as best you can.
+ example:
  */
 
 #include <iostream>
-namespace Example 
+
+namespace Example
 {
-struct UDT  
+struct UDT
 {
     int a; //a member variable
-    float b { 2.f }; //3) in-class initialization
-    UDT() : a(0) { } //3) 'constructor-initializer-list' member variable initialization
+    float b { 2.f }; //2) in-class initialization
+    UDT() : a(0) { } //2) 'constructor-initializer-list' member variable initialization
     void printThing()  //the member function
     {
         std::cout << "UDT::printThing() a:" << a << " b: " << b << std::endl;  //4) printing out something interesting
@@ -34,16 +37,15 @@ int main()
 }
 }
 
-//call Example::main()
-
+//end namespace Example
 
 struct Oscilloscope
 {
-    float horizontalInput;
-    float verticalInput;
-    int horizontalGain;
-    int verticalGain;
-    int horizontalSweepControl;
+    float horizontalInput { 0.5f };  //initialized in-class
+    float verticalInput { 0.5f };
+    int horizontalGain { 5 };
+    int verticalGain { 5 };
+    int horizontalSweepControl { 120 };
 
     Oscilloscope(); //constructor
 
@@ -52,15 +54,12 @@ struct Oscilloscope
     void measureVoltage (int channelA, int channelB);
 };
 
-Oscilloscope::Oscilloscope() :        //Constructor intializer list
-horizontalInput(0.0f),
-verticalInput(0.0f),
-horizontalGain(0),
-verticalGain(0),
-horizontalSweepControl(0)
-{
-
-}
+//Constructor intializer list   Is this dumb to align this way?
+Oscilloscope::Oscilloscope() : horizontalInput(0.0f),
+                               verticalInput(0.0f),
+                               horizontalGain(0),
+                               verticalGain(0),
+                               horizontalSweepControl(0) { }
 
 void Oscilloscope::graphVoltageOverTime(float yInput, float sweep)
 {
@@ -81,18 +80,18 @@ void Oscilloscope::measureVoltage (int channelA, int channelB)
 struct CellPhone
 {
     std::string carrier = "Sprint";
-    int screenSize = 3;
-    int gigabytesOfRAM = 8;
-    bool hasSDCardPort = false;
-    bool phoneHasHeadphoneJack = true;
-    CellPhone();
+    int screenSize;
+    int gigabytesOfRAM;
+    bool hasSDCardPort;
+    bool phoneHasHeadphoneJack;
+    CellPhone() : screenSize(3), gigabytesOfRAM(128), hasSDCardPort(false), phoneHasHeadphoneJack(true) { }
     struct TouchScreen
     {
-        float screenHeight = 4.5f;
-        float screenWidth = 3.0f;
-        int x = 0, y = 0;
-        int numberOfGestures = 3;
-        TouchScreen();
+        float screenHeight;
+        float screenWidth;
+        int x, y;
+        int numberOfGestures;
+        TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3) { }
         void fingerPrintVerification(bool ownersFinger, bool usersFinger);
         void getFingerPosition(int X, int Y);
         void quickSwipe(bool swipeUp, bool swipeDown);
@@ -105,8 +104,8 @@ struct CellPhone
     TouchScreen touchScreen;
 };
 
-CellPhone::CellPhone()  {}  //constructor in-class intialization
-CellPhone::TouchScreen::TouchScreen()  {} //nested constructor in-class intialization
+//CellPhone::CellPhone()  {}  //constructor in-class intialization
+//CellPhone::TouchScreen::TouchScreen()  {} //nested constructor in-class intialization
 
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
@@ -143,15 +142,16 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
     int numberOfFrets;
     float scaleLength;
     bool hasTremeloBridge;
-    int numberOfstrings;
-    Guitar();
+    int numberOfStrings;
+     Guitar() : numberOfFrets (22), scaleLength (25.5f), hasTremeloBridge (true), numberOfStrings (6) { }  // 'Constructor-initializer-list" memebr variable intitialization
+     
     struct Tremelo
     {
-        int numberOfSprings = 3;
-        bool isTremeloFloating = true;
+        int numberOfSprings{ 3 }; //in class initialization
+        bool isTremeloFloating { true };
         bool isTremeloLocking = true;
-        float fineTunerThreadPitch = 0.7f;
-        float massOfTremeloBlock = 34.5f;
+        float fineTunerThreadPitch { 0.7f };
+        float massOfTremeloBlock { 34.5f };
         Tremelo();
         void flutter(float startFrequency, float endFrequency, float flutterRate);
         void diveBomb(float startFrequency, float endFrequency, float pitchDecentTime);
@@ -165,7 +165,8 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
     Tremelo tremelo;
  };
 
-Guitar::Guitar() : numberOfFrets(22), scaleLength(26.5), hasTremeloBridge(true), numberOfstrings(8) {}
+//below is example of outside-class-constructor-initializer-list
+//Guitar::Guitar() : numberOfFrets(22), scaleLength(26.5), hasTremeloBridge(true), numberOfStrings(8) {}
 Guitar::Tremelo::Tremelo() {}  //constructor in-class initialization. no colon needed... interesting
 
 
@@ -208,6 +209,7 @@ struct ParametricEq
     void rumbleFilter (float rumbleFrequency, float filterCut);
     void killFeedback (float feedbackFrequency, float gainReduction);
 };
+//outside class constructor-initializer-list:
 ParametricEq::ParametricEq() :
 lowShelfFrequency(50.0f),
 highShelfFrequency(1800.0f),
@@ -230,21 +232,21 @@ void ParametricEq::killFeedback (float feedbackFrequency, float gainReduction)
 
 struct KeyBoardAssembly
 {
-    int numberOfKeys = 88;
-    bool keyHasAfterTouch = true;
-    bool keysAreWeighted = true;
-    float keyLength = 5.5f;
-    int octaveControls = 2;
+    int numberOfKeys { 88 };
+    bool keyHasAfterTouch { true };
+    bool keysAreWeighted { true };
+    float keyLength { 5.5f };
+    int octaveControls { 2 };
     KeyBoardAssembly();
     void sendMidi (int channel, int midiNote, int velocity);
     void shiftOctave (bool octaveShiftUp, bool octaveShiftDown);
     void sendMidiAfterTouch (int channel, int midiAfterTouch);
 };
-KeyBoardAssembly::KeyBoardAssembly() {}  //constructor in-class initialization
+KeyBoardAssembly::KeyBoardAssembly() {}  //default constructor in-class initialization
 
 void KeyBoardAssembly::sendMidi (int channel, int midiNote, int velocity)
 {
-    std::cout << "Channel: " << channel << " Note:  " << midiNote << " Velocity: " << velocity << std::endl;
+    std::cout << channel << midiNote << velocity << std::endl;
 }
 void KeyBoardAssembly::shiftOctave (bool octaveShiftUp, bool octaveShiftDown)
 {
@@ -285,27 +287,29 @@ void ArpeggiatorSection::swapPattern( std::string newPattern, int targetToReplac
 
 struct PadsSection
 {
-    int numberOfPads = 9;
-    bool padsAreVelocitySensitive = true;
-    int midiNumber = 127;
-    std::string padComposition = "foam rubber";
-    std::string durometerOfPad = "bouncy af";
+    int numberOfPads { 9 };
+    bool padsAreVelocitySensitive { true };
+    int midiNumber { 127 };
+    std::string padComposition { "foam rubber" };
+    std::string durometerOfPad { "bouncy af" };
     PadsSection();
     void playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard); //4) a member function whose
     void createSequences (ArpeggiatorSection arpSection, int padNum);
     void dynamicControl (int maxVelocity, int minVelocity);
 };
+
 PadsSection::PadsSection() {}
 
 void PadsSection::playBeat (int midiNoteRecord, int beatQuantize, KeyBoardAssembly keyboard)
 {
     std::cout << " Boom " << midiNoteRecord << beatQuantize << keyboard.numberOfKeys << std::endl;
 }
+
 void PadsSection::createSequences (ArpeggiatorSection arpSection, int padNum)
 {
     std::cout << "create sequences: "<< padNum << "# of patterns: " <<arpSection.numPatterns << std::endl;
-    
 }
+
 void PadsSection::dynamicControl (int maxVelocity, int minVelocity)
 {
     std::cout << maxVelocity << minVelocity << std::endl;
@@ -323,6 +327,7 @@ struct MixerSection
     void panPotHasMoved (int oldPanValue, int newPanValue);
     void muteTrack (int trackNumber);
 };
+
 MixerSection::MixerSection() :
 numberOfFaders(8),
 numberOfPanPots(8),
@@ -334,10 +339,12 @@ void MixerSection::faderHasChanged (int oldFaderValue, int newFaderValue)
 {
     std::cout << oldFaderValue << newFaderValue << std::endl;
 }
+
 void MixerSection::panPotHasMoved (int oldPanValue, int newPanValue)
 {
     std::cout << oldPanValue << newPanValue << std::endl;
 }
+
 void MixerSection::muteTrack (int trackNumber)
 {
     std::cout << trackNumber << std::endl;
@@ -345,26 +352,29 @@ void MixerSection::muteTrack (int trackNumber)
 
  struct TransportSection
  {
-    int numberOfButtons = 6;
-    std::string colorOfButtons = "grey";
-    int sizeOfButtons = 2;
-    int buttonSpacing = 2;
-    float postionOfTransport = 0.0f;
+     int numberOfButtons { 6 };
+     std::string colorOfButtons { "grey" };
+     int sizeOfButtons { 2 };
+     int buttonSpacing { 2 };
+     float postionOfTransport { 0.0f };
     TransportSection();
     void moveTransport(float currentTransportPosition, float destinationTransportPosition);
     void tapTempo (float timingInterval);
     void armTrack (int trackNumber);
  };
-TransportSection::TransportSection() {}
+
+TransportSection::TransportSection() {}   //default constructor
 
 void TransportSection::moveTransport(float currentTransportPosition, float destinationTransportPosition)
 {
     std::cout << currentTransportPosition << destinationTransportPosition << std::endl;
 }
+
 void TransportSection::tapTempo (float timingInterval)
 {
     std::cout << timingInterval << std::endl;
 }
+
 void TransportSection::armTrack (int trackNumber)
 {
     std::cout << trackNumber << std::endl;
@@ -381,7 +391,8 @@ void TransportSection::armTrack (int trackNumber)
     void triggerSample (PadsSection padSection);
     void sendMidiNotes(int noteNumber, int noteOn, int velocity, int noteOff);
  };
-MPK49KeyboardController::MPK49KeyboardController() {}
+
+MPK49KeyboardController::MPK49KeyboardController() { }
 
 void MPK49KeyboardController::triggerSample (PadsSection p)
 {
@@ -396,6 +407,7 @@ void MPK49KeyboardController::sendMidiNotes(int noteNumber, int noteOn, int velo
 int main()
 {
     Example::main();
+    
     std::cout << "we are in the main function" << std::endl;
     Oscilloscope oScope;  //3) instatiation of UDT
     oScope.measureVoltage(2, 4);
@@ -419,7 +431,6 @@ int main()
     pEq.killFeedback(220, -.5f);
 
     KeyBoardAssembly keyBoard;
-    keyBoard.sendMidi(11, 122, 127);  
     keyBoard.shiftOctave(true, false);
     keyBoard.sendMidiAfterTouch(2, 127);
 
@@ -442,7 +453,5 @@ int main()
     MPK49KeyboardController keyController;
     keyController.sendMidiNotes(122, 38, 127, 38);
 
-    
     std::cout << "good to go!" << std::endl;
 }
-
