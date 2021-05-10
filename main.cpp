@@ -27,66 +27,75 @@ Create a branch named Part5
  */
 
 #include <iostream>
-namespace Example 
-{
-struct Bar 
-{ 
-    int num = 0; 
-    Bar(int n) : num(n) { } 
-};
-struct Foo
-{
-    Bar scopeLifetimeFunc( int threshold, int startingVal ) //3), 4c) 
-    {
-        Bar bar(startingVal);                //4a)
-        while( bar.num < threshold )         //4a) 
-        { 
-            bar.num += 1;                    //4a)
-            
-            if( bar.num >= threshold )       //4b)
-                return bar;
-        }
-        
-        return Bar {-1}; //if your startingValue >= threshold, the while loop never runs
-    }
-};
+#include <vector>
+#include <random>
+#include <map>
+#include <ctime>
+#include <unistd.h>
 
-int main()
+namespace Example
 {
-    Foo foo;
-    auto bar = foo.scopeLifetimeFunc(3, 1);        //5) 
-    
-    std::cout << "bar.num: " << bar.num << std::endl;     //6) 
-    return 0;
-}
+    struct Bar
+    {
+        int num = 0;
+        Bar(int n) : num(n) { }
+    };
+    struct Foo
+    {
+        Bar scopeLifetimeFunc( int threshold, int startingVal ) //3), 4c)
+        {
+            Bar bar(startingVal);                //4a)
+            while( bar.num < threshold )         //4a)
+            {
+                bar.num += 1;                    //4a)
+
+                if( bar.num >= threshold )       //4b)
+                    return bar;
+            }
+
+            return Bar {-1}; //if your startingValue >= threshold, the while loop never runs
+        }
+    };
+
+    int main()
+    {
+        Foo foo;
+        auto bar = foo.scopeLifetimeFunc(3, 1);        //5)
+
+        std::cout << "bar.num: " << bar.num << std::endl;     //6)
+        return 0;
+    }
 }
 
 //call Example::main() in main()
 
 
 
+//end namespace Example
 
 struct Oscilloscope
 {
-    float horizontalInput { 0.5f };  //initialized in-class
-    float verticalInput { 0.5f };
-    int horizontalGain { 5 };
-    int verticalGain { 5 };
-    int horizontalSweepControl { 120 };
+    float horizontalInput; //{ 0.5f };  //initialized in-class
+    float verticalInput; // { 0.5f };
+    int horizontalGain; // { 5 };
+    int verticalGain; // { 5 };
+    int horizontalSweepControl; // { 120 };
+    int a { 4 }, b { 5 };
 
     Oscilloscope(); //constructor
 
     void graphVoltageOverTime(float yInput, float sweep);
     void graphWaveformDifference (int channelA, int channelB);
     void measureVoltage (int channelA, int channelB);
+    void measurement ( int a, int b );
 };
 
-//Constructor intializer list   Is this dumb to align this way?
+//Constructor intializer list
 Oscilloscope::Oscilloscope() : horizontalInput(0.0f),
-                               verticalInput(0.0f),
-                               horizontalGain(0),
-                               verticalGain(0),
-                               horizontalSweepControl(0) { }
+verticalInput(0.0f),
+horizontalGain(0),
+verticalGain(0),
+horizontalSweepControl(0) { }
 
 void Oscilloscope::graphVoltageOverTime(float yInput, float sweep)
 {
@@ -103,6 +112,21 @@ void Oscilloscope::measureVoltage (int channelA, int channelB)
     std::cout << "The combined voltage of channelA and channelB is: " << channelA + channelB << std::endl;
 }
 
+void Oscilloscope::measurement ( int a, int b )
+{
+    for (int i = 0; i < a; ++i)
+    {
+        std::cout << i << ": ";
+        
+        for (int j = b; j > 0; --j)
+        {
+            std::cout << j ;
+            horizontalInput += 1;  // modifying member variable each time through nested loop
+        }
+        verticalInput += 1;        // modifying member variable each time through loop
+    }
+    std::cout << "\nHorizontalInput: " << horizontalInput << " Vertical input: " << verticalInput << std::endl;  //varifying value changed
+}
 
 struct CellPhone
 {
@@ -118,15 +142,18 @@ struct CellPhone
         float screenWidth;
         int x, y;
         int numberOfGestures;
-        TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3) { }
+        bool backLightOn;
+        TouchScreen() :  screenHeight(4.5f), screenWidth(3.0f), x(0), y(0), numberOfGestures(3), backLightOn(true) { }
         void fingerPrintVerification(bool ownersFinger, bool usersFinger);
         void getFingerPosition(int X, int Y);
         void quickSwipe(bool swipeUp, bool swipeDown);
+        void backLightTimer(float timer);                   //backLightTimer turns off the backLight to save power after timer runs out.
     };
 
     void makeCall (int phoneNumber, std::string personYouAreCalling);
     void playGame (bool gameMode);
     void sendEmail (std::string emailAddress);
+    void dropPhone(int timesDropped);
 
     TouchScreen touchScreen;
 };
@@ -149,6 +176,17 @@ void CellPhone::sendEmail (std::string emailAddress)
     std::cout << emailAddress << std::endl;
 }
 
+void CellPhone::dropPhone(int timesDropped)
+{
+    std::cout << "Your RAM has fallen from: " << gigabytesOfRAM;
+    for ( int i = 0; i < timesDropped; i++)
+        {
+            srand(time(0));
+            gigabytesOfRAM = gigabytesOfRAM - rand()%30;
+        }
+    std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
+}
+
 void CellPhone::TouchScreen::fingerPrintVerification(bool ownersFinger, bool usersFinger)
 {
      std::cout << "This is " << (ownersFinger == usersFinger ? "your phone" : "not your phone") << "\n";
@@ -162,6 +200,22 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
     std::cout << swipeUp << swipeDown << std::endl;
 }
 
+void CellPhone::TouchScreen::backLightTimer(float timer)
+{
+    time_t currentTime = time(0);
+    while (backLightOn)
+    {
+        std::cout << "Screen ON\n";
+    
+        while ( time(0) - currentTime < timer )
+        {
+            //nice blocking loop here :/
+        }
+        std::cout << "Screen OFF\n";
+        backLightOn = false;         //modifying member variable
+    }
+    std::cout << "Goodbye" << std::endl;
+}
 
  struct Guitar
  {
@@ -170,7 +224,8 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
     float scaleLength;
     bool hasTremeloBridge;
     int numberOfStrings;
-     Guitar() : numberOfFrets (22), scaleLength (25.5f), hasTremeloBridge (true), numberOfStrings (6) { }  // 'Constructor-initializer-list" memebr variable intitialization
+     
+    Guitar() : numberOfFrets (22), scaleLength (25.5f), hasTremeloBridge (true), numberOfStrings (6) { }  // 'Constructor-initializer-list" memebr variable intitialization
      
     struct Tremelo
     {
@@ -244,17 +299,27 @@ centerBandFrequency(0.5f),
 centerBandGain(0.5f),
 centerBandSlope(0.7f)
 {}
+//vocalDeEss could use eq to assign Fc to 4kHz and decrease gain by 6dB.
 void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression)
 {
-    std::cout << sibilanceAmount << sibilanceSuppression << std::endl;
+    centerBandFrequency = 4000.f;
+    centerBandGain = centerBandGain - sibilanceAmount;
+    std::cout << "Vocal DeEss engaged.  Fc: " << centerBandFrequency << " gain reduced to: " << centerBandGain << std::endl;
 }
+// runbleFilter could modify member variable centerBandFrequency to 50Hz, centerBandGain to -20, and centerBandSlope to 3
 void ParametricEq::rumbleFilter (float rumbleFrequency, float filterCut)
 {
-    std::cout << " Hear my train a coming " << rumbleFrequency << filterCut << std::endl;
+    centerBandFrequency = 50.f;
+    centerBandGain = 0.25f;
+    centerBandSlope = 3.f;
+    std::cout << "Rumble filter Fc: " << centerBandFrequency << "Hz centerBand gain: " << centerBandGain << " Slope: " << centerBandSlope << std::endl;
 }
+//function could assign FB frequency to centerBandFrequency and assign centerBandGain to centerBandGain - gainReduction
 void ParametricEq::killFeedback (float feedbackFrequency, float gainReduction)
 {
-    std::cout << "EEEEEEE " << feedbackFrequency << gainReduction << std::endl;
+    centerBandFrequency = feedbackFrequency;
+    centerBandGain = centerBandGain - gainReduction;
+    std::cout << "FB suppression Fc: " << centerBandFrequency << " gain reduced to: " << centerBandGain << std::endl;
 }
 
 struct KeyBoardAssembly
@@ -439,15 +504,18 @@ int main()
     Oscilloscope oScope;  //3) instatiation of UDT
     oScope.measureVoltage(2, 4);
     oScope.graphWaveformDifference(32, 16);
+    oScope.measurement(5, 6);
 
     CellPhone myPhone;
     CellPhone yourPhone;
     myPhone.makeCall(231345632, "Karen");
+    myPhone.dropPhone(2);
     CellPhone::TouchScreen myTouchscreen;
     myTouchscreen.fingerPrintVerification(true, false);
     yourPhone.makeCall(8675301, "Daryl");
     CellPhone::TouchScreen yourTouchscreen;
     yourTouchscreen.fingerPrintVerification(true, true);
+    myTouchscreen.backLightTimer(2);                          //part5 loop that changes member variable backLightOn in seconds
 
     Guitar myGuitar;
     myGuitar.strumChord("A", true, true);
@@ -455,7 +523,7 @@ int main()
 
     ParametricEq pEq;
     pEq.rumbleFilter(30.0f, 120.0f);
-    pEq.killFeedback(220, -.5f);
+    pEq.killFeedback(220, .15f);
 
     KeyBoardAssembly keyBoard;
     keyBoard.shiftOctave(true, false);
@@ -482,3 +550,4 @@ int main()
 
     std::cout << "good to go!" << std::endl;
 }
+
