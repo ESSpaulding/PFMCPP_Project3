@@ -80,7 +80,6 @@ struct Oscilloscope
     int horizontalGain; // { 5 };
     int verticalGain; // { 5 };
     int horizontalSweepControl; // { 120 };
-    int a { 4 }, b { 5 };
 
     Oscilloscope(); //constructor
 
@@ -158,9 +157,6 @@ struct CellPhone
     TouchScreen touchScreen;
 };
 
-//CellPhone::CellPhone()  {}  //constructor in-class intialization
-//CellPhone::TouchScreen::TouchScreen()  {} //nested constructor in-class intialization
-
 void CellPhone::makeCall (int phoneNumber, std::string personYouAreCalling)
 {
     std::cout << "Hello " << phoneNumber << " this is " << personYouAreCalling << " Speaking" << std::endl;
@@ -181,7 +177,7 @@ void CellPhone::dropPhone(int timesDropped)
     std::cout << "Your RAM has fallen from: " << gigabytesOfRAM;
     for ( int i = 0; i < timesDropped; i++)
         {
-            srand(time(0));
+            //srand(time(0));
             gigabytesOfRAM = gigabytesOfRAM - rand()%30;
         }
     std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
@@ -202,12 +198,12 @@ void CellPhone::TouchScreen::quickSwipe(bool swipeUp, bool swipeDown)
 
 void CellPhone::TouchScreen::backLightTimer(float timer)
 {
-    time_t currentTime = time(0);
+    time_t currentTime = time(nullptr);
     while (backLightOn)
     {
         std::cout << "Screen ON\n";
     
-        while ( time(0) - currentTime < timer )
+        while ( time(nullptr) - currentTime < timer )
         {
             //nice blocking loop here :/
         }
@@ -305,12 +301,13 @@ void ParametricEq::vocalDeEss (float sibilanceAmount, float sibilanceSuppression
     centerBandFrequency = 4000.f;
     centerBandGain = centerBandGain - sibilanceAmount;
     std::cout << "Vocal DeEss engaged.  Fc: " << centerBandFrequency << " gain reduced to: " << centerBandGain << std::endl;
+    sibilanceSuppression += 1;
 }
 // runbleFilter could modify member variable centerBandFrequency to 50Hz, centerBandGain to -20, and centerBandSlope to 3
 void ParametricEq::rumbleFilter (float rumbleFrequency, float filterCut)
 {
-    centerBandFrequency = 50.f;
-    centerBandGain = 0.25f;
+    centerBandFrequency = rumbleFrequency;
+    centerBandGain = filterCut;
     centerBandSlope = 3.f;
     std::cout << "Rumble filter Fc: " << centerBandFrequency << "Hz centerBand gain: " << centerBandGain << " Slope: " << centerBandSlope << std::endl;
 }
@@ -499,6 +496,8 @@ void MPK49KeyboardController::sendMidiNotes(int noteNumber, int noteOn, int velo
 int main()
 {
     Example::main();
+
+     std::srand(std::time(nullptr));
     
     std::cout << "we are in the main function" << std::endl;
     Oscilloscope oScope;  //3) instatiation of UDT
