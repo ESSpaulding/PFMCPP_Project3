@@ -176,10 +176,10 @@ void CellPhone::dropPhone(int timesDropped)
 {
     std::cout << "Your RAM has fallen from: " << gigabytesOfRAM;
     for ( int i = 0; i < timesDropped; i++)
-        {
-            //srand(time(0));
-            gigabytesOfRAM = gigabytesOfRAM - rand()%30;
-        }
+    {
+        //srand(time(0));
+        gigabytesOfRAM = gigabytesOfRAM - rand()%30;
+    }
     std::cout << " to " << gigabytesOfRAM << " becasue you dropped your phone " << timesDropped << " times." << std::endl;
 }
 
