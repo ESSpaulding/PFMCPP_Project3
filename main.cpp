@@ -497,7 +497,7 @@ int main()
 {
     Example::main();
 
-     std::srand(std::time(nullptr));
+    std::srand(std::time(nullptr));
     
     std::cout << "we are in the main function" << std::endl;
     Oscilloscope oScope;  //3) instatiation of UDT
